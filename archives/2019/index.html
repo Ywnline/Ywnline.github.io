@@ -43,71 +43,7 @@
 <body>
   
   
-  <div class="cover-wrapper">
-    <cover class='cover  half'>
-      
-        
-  <h1 class='title'>Material X</h1>
-
-
-  <div class="m_search">
-    <form name="searchform" class="form u-search-form">
-      <input type="text" class="input u-search-input" placeholder="" />
-      <i class="icon fas fa-search fa-fw"></i>
-    </form>
-  </div>
-
-<div class='menu navgation'>
-  <ul class='h-list'>
-    
-      
-        <li>
-          <a class="nav home" href="/"
-            
-            
-            id="home">
-            <i class='fas fa-rss fa-fw'></i>&nbsp;博文
-          </a>
-        </li>
-      
-        <li>
-          <a class="nav home" href="/projects/"
-            
-            
-            id="projects">
-            <i class='fas fa-code-branch fa-fw'></i>&nbsp;项目
-          </a>
-        </li>
-      
-        <li>
-          <a class="nav home" href="/friends/"
-            
-              rel="nofollow"
-            
-            
-            id="friends">
-            <i class='fas fa-link fa-fw'></i>&nbsp;友链
-          </a>
-        </li>
-      
-        <li>
-          <a class="nav home" href="/about/"
-            
-              rel="nofollow"
-            
-            
-            id="about">
-            <i class='fas fa-info-circle fa-fw'></i>&nbsp;关于
-          </a>
-        </li>
-      
-    
-  </ul>
-</div>
-
-      
-    </cover>
-    <header class="l_header pure">
+  <header class="l_header pure">
   <div id="loading-bar-wrapper">
     <div id="loading-bar" class="pure"></div>
   </div>
@@ -271,10 +207,9 @@
 	</aside>
 <script>setLoadingBarProgress(40);</script>
 
-  </div>
 
 
-  <div class="l_body">
+  <div class="l_body nocover">
     <div class='body-wrapper'>
       <div class='l_main'>
 	
@@ -367,7 +302,13 @@
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
       <p>思路分析：在要排序的切片中，选出最小的一个元素与第一个位置的元素交换。然后在剩下的元素当中再找最小的与第二个位置的元素交换，如此循环到倒数第二个元素和最后一个元素比较为止。</p>
-<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line"></span><br><span class="line">import (</span><br><span class="line">	&quot;fmt&quot;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">var sli = []int&#123;1, 43, 54, 62, 21, 66, 32, 78, 36, 76, 39&#125;</span><br><span class="line"></span><br><span class="line">func selectSort(sli []int) []int &#123;</span><br><span class="line">	//双重循环完成，外层控制轮数，内层控制比较次数</span><br><span class="line">	len := len(sli)</span><br><span class="line">	for i := 0; i &lt; len-1; i++ &#123;</span><br><span class="line">		//先假设最小的值的位置</span><br><span class="line">		k := i</span><br><span class="line">		for j := i + 1; j &lt; len; j++ &#123;</span><br><span class="line">			//sli[k] 是当前已知的最小值</span><br><span class="line">			if sli[k] &gt; sli[j] &#123;</span><br><span class="line">				//比较，发现更小的,记录下最小值的位置；并且在下次比较时采用已知的最小值进行比较。</span><br><span class="line">				k = j</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		//已经确定了当前的最小值的位置，保存到 k 中。如果发现最小值的位置与当前假设的位置 i 不同，则位置互换即可。</span><br><span class="line">		if k != i &#123;</span><br><span class="line">			sli[k], sli[i] = sli[i], sli[k]</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	return sli</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">	res := selectSort(sli)</span><br><span class="line">	fmt.Println(res)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+        <div class="readmore">
+          <a href="/2019/08/02/选择排序/" class="flat-box">
+            <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
+            Read More
+          </a>
+        </div>
       
     </div>
     
@@ -457,9 +398,13 @@
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
       <p>思路分析：选择一个基准元素，通常选择第一个元素或者最后一个元素。通过一趟扫描，将待排序列分成两部分，一部分比基准元素小，一部分大于等于基准元素。此时基准元素在其排好序后的正确位置，然后再用同样的方法递归地排序划分的两部分。</p>
-<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line"></span><br><span class="line">import (</span><br><span class="line">	&quot;fmt&quot;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">var sli = []int&#123;1, 43, 54, 62, 21, 66, 32, 78, 36, 76, 39&#125;</span><br><span class="line"></span><br><span class="line">func quickSort(sli []int) []int &#123;</span><br><span class="line">	//先判断是否需要继续进行</span><br><span class="line">	len := len(sli)</span><br><span class="line">	if len &lt;= 1 &#123;</span><br><span class="line">		return sli</span><br><span class="line">	&#125;</span><br><span class="line">	//选择第一个元素作为基准</span><br><span class="line">	base_num := sli[0]</span><br><span class="line">	//遍历除了标尺外的所有元素，按照大小关系放入左右两个切片内</span><br><span class="line">	//初始化左右两个切片</span><br><span class="line">	left_sli := []int&#123;&#125;  //小于基准的</span><br><span class="line">	right_sli := []int&#123;&#125; //小于基准的</span><br><span class="line">	for i := 1; i &lt; len; i++ &#123;</span><br><span class="line">		if base_num &gt; sli[i] &#123;</span><br><span class="line">			//放入左边切片</span><br><span class="line">			left_sli = append(left_sli, sli[i])</span><br><span class="line">		&#125; else &#123;</span><br><span class="line">			//放入右边切片</span><br><span class="line">			right_sli = append(right_sli, sli[i])</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	//再分别对左边和右边的切片进行相同的排序处理方式递归调用这个函数</span><br><span class="line">	left_sli = quickSort(left_sli)</span><br><span class="line">	right_sli = quickSort(right_sli)</span><br><span class="line"></span><br><span class="line">	//合并</span><br><span class="line">	left_sli = append(left_sli, base_num)</span><br><span class="line">	return append(left_sli, right_sli...)</span><br><span class="line">&#125;</span><br><span class="line">func main() &#123;</span><br><span class="line">	res := quickSort(sli)</span><br><span class="line">	fmt.Println(res)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
+      
+        <div class="readmore">
+          <a href="/2019/08/02/快速排序/" class="flat-box">
+            <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
+            Read More
+          </a>
+        </div>
       
     </div>
     
@@ -549,18 +494,13 @@
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
       <p>博客内容更新</p>
-<h3 id="新建文章"><a href="#新建文章" class="headerlink" title="新建文章"></a>新建文章</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server 或 <span class="variable">$hexo</span> s</span><br></pre></td></tr></table></figure>
-
-<h3 id="清空资源文件"><a href="#清空资源文件" class="headerlink" title="清空资源文件"></a>清空资源文件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo clean</span><br></pre></td></tr></table></figure>
-
-<h3 id="重新生成资源文件"><a href="#重新生成资源文件" class="headerlink" title="重新生成资源文件"></a>重新生成资源文件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate 或 $ hexo g</span><br></pre></td></tr></table></figure>
-
-<h3 id="发布文章到github-io"><a href="#发布文章到github-io" class="headerlink" title="发布文章到github.io"></a>发布文章到github.io</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy 或 hexo d</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
+      
+        <div class="readmore">
+          <a href="/2019/08/02/更新blog/" class="flat-box">
+            <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
+            Read More
+          </a>
+        </div>
       
     </div>
     
@@ -595,7 +535,7 @@
   <div class='content pure'>
     
       <div class='avatar'>
-        <img class='avatar' src='https://cdn.jsdelivr.net/gh/xaoxuu/assets@master/avatar/avatar.png'/>
+        <img class='avatar' src='https://avatars0.githubusercontent.com/u/31528056?s=460&v=4'/>
       </div>
     
     
@@ -603,15 +543,7 @@
       <div class="social-wrapper">
         
           
-            <a href="/atom.xml"
-              class="social fas fa-rss flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-            </a>
-          
-        
-          
-            <a href="mailto:me@xaoxuu.com"
+            <a href="mailto:yw0601@126.com"
               class="social fas fa-envelope flat-btn"
               target="_blank"
               rel="external nofollow noopener noreferrer">
@@ -619,7 +551,7 @@
           
         
           
-            <a href="https://github.com/xaoxuu"
+            <a href="https://github.com/Ywnline"
               class="social fab fa-github flat-btn"
               target="_blank"
               rel="external nofollow noopener noreferrer">
@@ -627,7 +559,7 @@
           
         
           
-            <a href="https://music.163.com/#/user/home?id=63035382"
+            <a href="https://music.163.com"
               class="social fas fa-headphones-alt flat-btn"
               target="_blank"
               rel="external nofollow noopener noreferrer">
@@ -775,54 +707,6 @@
           
         
       
-        
-          
-          
-            
-
-
-  <section class='widget music'>
-    
-<header class='pure'>
-  <div><i class="fas fa-compact-disc fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;最近在听</div>
-  
-    <a class="rightBtn"
-    
-      rel="external nofollow noopener noreferrer"
-    
-    
-      target="_blank"
-    
-    href="https://music.163.com/#/user/home?id=63035382"
-    title="https://music.163.com/#/user/home?id=63035382">
-    <i class="far fa-heart fa-fw"></i></a>
-  
-</header>
-
-    <div class='content pure'>
-      
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.7.0/dist/APlayer.min.css">
-  <div class="aplayer"
-    data-theme="#1BCDFC"
-    
-    
-    data-mode="circulation"
-    data-server="netease"
-    data-type="playlist"
-    data-id="2615636388"
-    data-volume="0.7">
-  </div>
-  <script src="https://cdn.jsdelivr.net/npm/aplayer@1.7.0/dist/APlayer.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/meting@1.1.0/dist/Meting.min.js"></script>
-
-
-    </div>
-  </section>
-
-
-          
-        
-      
     
 
   
@@ -834,15 +718,7 @@
     <div class="social-wrapper">
       
         
-          <a href="/atom.xml"
-            class="social fas fa-rss flat-btn"
-            target="_blank"
-            rel="external nofollow noopener noreferrer">
-          </a>
-        
-      
-        
-          <a href="mailto:me@xaoxuu.com"
+          <a href="mailto:yw0601@126.com"
             class="social fas fa-envelope flat-btn"
             target="_blank"
             rel="external nofollow noopener noreferrer">
@@ -850,7 +726,7 @@
         
       
         
-          <a href="https://github.com/xaoxuu"
+          <a href="https://github.com/Ywnline"
             class="social fab fa-github flat-btn"
             target="_blank"
             rel="external nofollow noopener noreferrer">
@@ -858,7 +734,7 @@
         
       
         
-          <a href="https://music.163.com/#/user/home?id=63035382"
+          <a href="https://music.163.com"
             class="social fas fa-headphones-alt flat-btn"
             target="_blank"
             rel="external nofollow noopener noreferrer">
@@ -947,31 +823,6 @@
 
 
 
-
-  
-  
-  
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-backstretch/2.0.4/jquery.backstretch.min.js"></script>
-    <script type="text/javascript">
-      $(function(){
-        if ('.cover') {
-          $('.cover').backstretch(
-          ["https://img.vim-cn.com/6d/a0c9e6f9efad8b731cb7376504bd10d79d2053.jpg"],
-          {
-            duration: "6000",
-            fade: "2500"
-          });
-        } else {
-          $.backstretch(
-          ["https://img.vim-cn.com/6d/a0c9e6f9efad8b731cb7376504bd10d79d2053.jpg"],
-          {
-            duration: "6000",
-            fade: "2500"
-          });
-        }
-      });
-    </script>
-  
 
 
 
