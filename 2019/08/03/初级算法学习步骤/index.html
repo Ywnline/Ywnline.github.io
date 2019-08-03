@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   
-  <title>选择排序 | Ywnline</title>
+  <title>初级算法学习步骤 | Ywnline</title>
   
   
 
@@ -172,8 +172,8 @@
         
   
     <h1 class="title">
-      <a href="/2019/08/02/选择排序/">
-        选择排序
+      <a href="/2019/08/03/初级算法学习步骤/">
+        初级算法学习步骤
       </a>
     </h1>
   
@@ -202,7 +202,7 @@
             <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2019-08-02</p>
+    <p>2019-08-03</p>
   </a>
 </div>
 
@@ -254,9 +254,24 @@
 
       <section class="article typo">
         <div class="article-entry" itemprop="articleBody">
-          <p>思路分析：在要排序的切片中，选出最小的一个元素与第一个位置的元素交换。然后在剩下的元素当中再找最小的与第二个位置的元素交换，如此循环到倒数第二个元素和最后一个元素比较为止。</p>
+          <p>算法可以说是解决问题的步骤。<br>按常理来说学习算法要先掌握一定的数据结构。但因为数组也是一大数据结构，而且也是非常常用的东西，所以在最初，做一些用数组解决的问题（其实java里的数据结构也都是基于数组和类来实现各种数据结构）。</p>
 <a id="more"></a>
-<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line"></span><br><span class="line">import (</span><br><span class="line">	&quot;fmt&quot;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">var sli = []int&#123;1, 43, 54, 62, 21, 66, 32, 78, 36, 76, 39&#125;</span><br><span class="line"></span><br><span class="line">func selectSort(sli []int) []int &#123;</span><br><span class="line">	//双重循环完成，外层控制轮数，内层控制比较次数</span><br><span class="line">	len := len(sli)</span><br><span class="line">	for i := 0; i &lt; len-1; i++ &#123;</span><br><span class="line">		//先假设最小的值的位置</span><br><span class="line">		k := i</span><br><span class="line">		for j := i + 1; j &lt; len; j++ &#123;</span><br><span class="line">			//sli[k] 是当前已知的最小值</span><br><span class="line">			if sli[k] &gt; sli[j] &#123;</span><br><span class="line">				//比较，发现更小的,记录下最小值的位置；并且在下次比较时采用已知的最小值进行比较。</span><br><span class="line">				k = j</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		//已经确定了当前的最小值的位置，保存到 k 中。如果发现最小值的位置与当前假设的位置 i 不同，则位置互换即可。</span><br><span class="line">		if k != i &#123;</span><br><span class="line">			sli[k], sli[i] = sli[i], sli[k]</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	return sli</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">	res := selectSort(sli)</span><br><span class="line">	fmt.Println(res)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>比如一维数组里：计算两个数组的交集，用数组实现约瑟夫环等等；二维数组里（平面坐标初级）：扫雷，边缘检测问题，生命游戏等等。之后进行对数据结构的掌握，会了常用数据结构之后，就可以进行深入的算法研究了。<br>所以这里的建议的顺序是：<br>熟习数组相关操作<br>熟习字符串相关操作<br>认识基础数据结构：线性表、顺序表、链表、栈、队列、树、哈希表、图等。并且自己实现以上数据结构<br>掌握使用提供的数据结构API。<br>排序算法、查找算法。<br>四个基本算法思想：穷举，递推，递归，概率。<br>数学问题，数论问题，数据结构问题，几何问题，字符串问题，大数运算问题。<br>五大常用算法：分治、动态规划（DP），贪心，回溯，分支界定。<br>多看算法题和算法书。</p>
+<h2 id="详细内容"><a href="#详细内容" class="headerlink" title="详细内容"></a>详细内容</h2><p>注：这里都是用java语言作为例子解答代码进行讲解，同时附带的也都是java的api使用说明，但其实算法对语言依赖性不大，重要的是思想。本文提供给大家一个学习方案作为参考。</p>
+<h3 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h3><p>内容：熟习数组的常用操作，可以做一些基础题，可以上leetcode或者别的算法题网站，刷掉初级算法题库里的数组10几个题目，这样对一维和二维数组的掌握灵活度就比较高了。<br>一个比较典型的二维数组逻辑题目：<br>旋转二维数组：给定一个n×n的二维矩阵表示一个图像，输出将图像旋转90度的样子。（不要用另一个矩阵来旋转）<br>题目具体内容点击标题可以进去查看。<br>其他数组例题：<br>两个数组的交集，数组实现约瑟夫环，简易扫雷，生命游戏等等。<br>其他数组的操作大家可以自行去看看别的题，锻炼一下数组的运用思想。</p>
+<h3 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h3><p>内容：字符串的操作，比如回文串判定、字符串翻转等等。同样建议上题库做一些相应练习。在java里对应的API：string，stringbuilder，stringbuffer。</p>
+<h3 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h3><p>此章内容具体参照：java数据结构和他的API<br>内容：这一部分需要自己先去学习一遍数据结构，然后自己写出来。掌握之后，再去查看api文档，最后学会如何使用api里的数据结构写算法，下面介绍的主要是api的对应方式。<br>1、基础数组、线性表：<br>（1）数组：<br>API：Arrays。<br>（2）线性表：<br>API：ArrayList。<br>2、链表：<br>链表是以节点类为基础的，每个节点类有一个成员变量是下一个节点。<br>API：LinkedList。<br>3、集合（java）：<br>API：Collections。<br>这个接口提供了很多常用方法，具体如何使用可以参照帮助文档。<br>4、向量：（可增长数组）<br>API：Vector接口提供方法与数组类似，具体查看API帮助手册。<br>5、栈：<br>自己先基于数组去实现。<br>API：Stack接口提供查看，移除，压入，查找，判空操作<br>6、队列、双端队列、优先队列：<br>（1）队列：<br>API：Queue。<br>（2）双端队列：<br>API：Deque。<br>（3）优先队列：<br>   API：PriorityQueue档。<br>7、哈希表（映射表）：<br>API：<br>（1）Hashmap提供了键—值对应的功能。<br>（2）TreeMap提供了可排序的映射表。<br>8、树：<br>树没有api，可以用上面学过的东西去实现它。<br>9、图：<br>图也是没有api的，用之前学过的结构可以构造。</p>
+<h3 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h3><p>内容：在排序里，需要了解这九大排序算法：<br>1、冒泡排序：每两个交换，每轮吧最大的放后面；<br>2、选择排序：每轮选出最大的放后面；<br>3、插入排序：一个线性表，一开始只有一个元素，加一个排一个；<br>4、希尔排序：<br>5、快速排序：<br>6、堆排序：<br>7、合并排序：<br>8、基数排序：<br>9、计数排序：</p>
+<h3 id="查找"><a href="#查找" class="headerlink" title="查找"></a>查找</h3><p>这个阶段要了解到查找算法在平时的应用，最基础的是直接查找和二分查找，但是有时候在不同场景会有一些优化。<br>1、二分法：对排序好的数组用，Collections提供了此方法<br>2、二分法的各种优化搜索：<br>3、数据结构中的查找：<br>（1）顺序表：同数组，序号或者关键字顺序、二分查找。<br>（2）链表：关键字查找，只能一个个往后找，返回引用。<br>（3）树：树或者二叉树遍历一个个找，二叉搜索树可以根据大小找，原理和二分法一样。平衡二叉树同而搜索树，红黑树效率高。<br>（4）图：深度优先遍历查找。</p>
+<h3 id="4个基本算法思想"><a href="#4个基本算法思想" class="headerlink" title="4个基本算法思想"></a>4个基本算法思想</h3><p>此章节具体参照：4个基本算法思想：穷举、递推、递归、概率<br>内容：这4个基本算法思想是解决基础问题的很实用的方法。这里开始其实就已经是把所有需要的知识准备好了，之后就要开始解题了。<br>1、穷举：暴力破解，n层for循环。枚举每一种可能。<br>2、递推：简单的动态规划，根据递推公式，累加。<br>3、普通递归：化解问题逐渐变小（从n到1）<br>4、概率：使用random数量足够大的时候，得到近似结果。</p>
+<h3 id="数学问题，数论问题，数据结构问题，几何问题，字符串问题，大数运算问题："><a href="#数学问题，数论问题，数据结构问题，几何问题，字符串问题，大数运算问题：" class="headerlink" title="数学问题，数论问题，数据结构问题，几何问题，字符串问题，大数运算问题："></a>数学问题，数论问题，数据结构问题，几何问题，字符串问题，大数运算问题：</h3><p>内容：这一块需要了解的是零散问题的应用。每一块我举几个例子，推荐大家还是上刷题网站吧零散的题给刷掉，不推荐直接做各个算法难题，先做这些零散题会对之后系统做算法有一些帮助。<br>以下我诺列一些题目，大家可以自己查查，刷题网站上也有。<br>1、数学问题：<br>罗马数字转换<br>Math函数的应用（自行查看api帮助文档）。<br>保留小数点的操作：例如String.format（“%.2f”,string）<br>2、数据结构问题：<br>约瑟夫环：具体点击这里<br>括号匹配：具体点击这里<br>链表排序、最短路径等等。<br>3、数论问题：<br>素数、完全数为代表的问题。<br>4、几何问题：<br>java里有API：抽象类shape——具体类line2d，Point2d提供了一些集合方法。<br>5、大数运算问题：<br>API：BigInteger，提供加减乘除模，大小比较，转化等运算。<br>6、字符串问题：<br>API：String大致包含这些方法：是否包含，比较（可不考虑大小写），第一次出现索引（前后），两个字符串的某个区域是否相等（regionmatches），replace替换，split（[，]）分割，substring删减，tochararray变成字符数组，tolow/toup，trim忽略前后空白，valueof把别的转换成字符串。</p>
+<h3 id="五大常用算法"><a href="#五大常用算法" class="headerlink" title="五大常用算法"></a>五大常用算法</h3><p>五大算法：分治，回溯，贪心，DP（动态规划），分支界定。<br>内容在这一块是需要重点看看的，前4个是重点，也有非常多的经典例题。这一部分还是比较需要时间的，以下仅仅是介绍，点开链接具有详细的每个算法讲解。</p>
+<p>1、分治法<br>首先看一下二分搜索：一串数，取中间的数并且平分两半，如果比中间数大，就去上半部分找，然后再两半……这样查找就是分治思想：把一个问题分解成若干个一样的小块。<br>具体详情：分治算法——五大常用算法之一<br>基本概念：<br>把一个复杂的问题分成两个或更多的相同或相似的子问题，再把子问题分成更小的子问题。直到最后子问题可以简单的直接求解，原问题的解即子问题的解的合并。</p>
+<p>2、动态规划法<br>具体详情：动态规划——五大常用算法之一<br>基本概念：<br>动态规划（DP）就是：每走一步，都会根据之前的情况来决定这一步的走向，所以，这种多阶段最优化决策解决问题的过程就称为动态规划。使用动态规划法一般会有一个递推公式（递推就是简单动态规划）。当然，最难找到的也是这个递推公式。</p>
+<p>3、贪心算法<br>具体详情：贪心算法——五大常用算法之一<br>基本概念：<br>在对问题求解时，总是做出在当前看来是最好的选择。不从整体最优上加以考虑，所做出的仅是在某种意义上的局部最优解。<br>贪心算法没有固定的算法框架，算法设计的关键是贪心策略的选择。必须注意的是，贪心算法不是对所有问题都能得到整体最优解，选择的贪心策略必须具备无后效性，即某个状态以后的过程不会影响以前的状态，只与当前状态有关。<br>所以对所采用的贪心策略一定要仔细分析其是否满足无后效性。</p>
+<p>4、回溯算法<br>具体详情：回溯算法——五大常用算法之一<br>基本概念：<br>      回溯算法实际上一个类似枚举的搜索尝试过程（排列组合），主要是在搜索尝试过程中寻找问题的解，当发现已不满足求解条件时，就“回溯”返回，尝试别的路径。<br>回溯法是一种选优搜索法，按选优条件向前搜索，以达到目标。但当探索到某一步时，发现原先选择并不优或达不到目标，就退回一步重新选择，这种走不通就退回再走的技术为回溯法，而满足回溯条件的某个状态的点称为“回溯点”。<br>     许多复杂的，规模较大的问题都可以使用回溯法，有“通用解题方法”的美称。</p>
+<p>5、分支界定<br>这个算法个人没有仔细研究，可能是因为学的较浅没有经常用到。下面内容做一个参考：<br>基本描述<br>    类似于回溯法，也是一种在问题的解空间树T上搜索问题解的算法。但在一般情况下，分支限界法与回溯法的求解目标不同。回溯法的求解目标是找出T中满足约束条件的所有解，而分支限界法的求解目标则是找出满足约束条件的一个解，或是在满足约束条件的解中找出使某一目标函数值达到极大或极小的解，即在某种意义下的最优解。</p>
+
         </div>
         
           
@@ -267,10 +282,10 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-08-02T15:19:58+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-08-03T14:55:44+08:00">
   <a class='notlink'>
     <i class="fas fa-clock" aria-hidden="true"></i>
-    <p>last updated at Aug 2, 2019</p>
+    <p>last updated at Aug 3, 2019</p>
   </a>
 </div>
 
@@ -279,7 +294,7 @@
         
           
   
-  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/排序/" rel="nofollow"><i class="fas fa-hashtag" aria-hidden="true"></i>&nbsp;<p>排序</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/算法/" rel="nofollow"><i class="fas fa-hashtag" aria-hidden="true"></i>&nbsp;<p>算法</p></a></div>
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/算法/" rel="nofollow"><i class="fas fa-hashtag" aria-hidden="true"></i>&nbsp;<p>算法</p></a></div>
 
 
         
@@ -292,7 +307,7 @@
       
         <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer"
           
-          href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/08/02/选择排序/&title=选择排序 | Ywnline&summary=思路分析：在要排序的切片中，选出最小的一个元素与第一个位置的元素交换。然后在剩下的元素当中再找最小的与第二个位置的元素交换，如此循环到倒数第二个元素和最后一个元素比较为止。"
+          href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/08/03/初级算法学习步骤/&title=初级算法学习步骤 | Ywnline&summary=算法可以说是解决问题的步骤。按常理来说学习算法要先掌握一定的数据结构。但因为数组也是一大数据结构，而且也是非常常用的东西，所以在最初，做一些用数组解决的问题（其实java里的数据结构也都是基于数组和类来实现各种数据结构）。"
           
           >
           
@@ -304,7 +319,7 @@
       
         <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer"
           
-          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://yoursite.com/2019/08/02/选择排序/&title=选择排序 | Ywnline&summary=思路分析：在要排序的切片中，选出最小的一个元素与第一个位置的元素交换。然后在剩下的元素当中再找最小的与第二个位置的元素交换，如此循环到倒数第二个元素和最后一个元素比较为止。"
+          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://yoursite.com/2019/08/03/初级算法学习步骤/&title=初级算法学习步骤 | Ywnline&summary=算法可以说是解决问题的步骤。按常理来说学习算法要先掌握一定的数据结构。但因为数组也是一大数据结构，而且也是非常常用的东西，所以在最初，做一些用数组解决的问题（其实java里的数据结构也都是基于数组和类来实现各种数据结构）。"
           
           >
           
@@ -316,7 +331,7 @@
       
         <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer"
           
-          href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2019/08/02/选择排序/&title=选择排序 | Ywnline&summary=思路分析：在要排序的切片中，选出最小的一个元素与第一个位置的元素交换。然后在剩下的元素当中再找最小的与第二个位置的元素交换，如此循环到倒数第二个元素和最后一个元素比较为止。"
+          href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2019/08/03/初级算法学习步骤/&title=初级算法学习步骤 | Ywnline&summary=算法可以说是解决问题的步骤。按常理来说学习算法要先掌握一定的数据结构。但因为数组也是一大数据结构，而且也是非常常用的东西，所以在最初，做一些用数组解决的问题（其实java里的数据结构也都是基于数组和类来实现各种数据结构）。"
           
           >
           
@@ -340,33 +355,14 @@
         
             <div class="prev-next">
                 
-                    <section class="prev">
-                        <span class="art-item-left">
-                            <h6><i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;Previous</h6>
-                            <h4>
-                                <a href="/2019/08/02/插入排序/" rel="prev" title="插入排序">
-                                  
-                                      插入排序
-                                  
-                                </a>
-                            </h4>
-                            
-                                
-                                <h6 class="tags">
-                                    <a class="tag" href="/tags/排序/"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>排序</a> <a class="tag" href="/tags/算法/"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>算法</a>
-                                </h6>
-                            
-                        </span>
-                    </section>
-                
                 
                     <section class="next">
                         <span class="art-item-right" aria-hidden="true">
                             <h6>Next&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i></h6>
                             <h4>
-                                <a href="/2019/08/02/快速排序/" rel="prev" title="快速排序">
+                                <a href="/2019/08/03/冒泡排序/" rel="prev" title="冒泡排序">
                                     
-                                        快速排序
+                                        冒泡排序
                                     
                                 </a>
                             </h4>
@@ -404,7 +400,7 @@
 
   <script>
     window.subData = {
-      title: '选择排序',
+      title: '初级算法学习步骤',
       tools: true
     }
   </script>
@@ -476,7 +472,7 @@
 </header>
 
     <div class='content pure'>
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#代码实现"><span class="toc-text">代码实现</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#详细内容"><span class="toc-text">详细内容</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#数组"><span class="toc-text">数组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#字符串"><span class="toc-text">字符串</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数据结构"><span class="toc-text">数据结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#排序"><span class="toc-text">排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#查找"><span class="toc-text">查找</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4个基本算法思想"><span class="toc-text">4个基本算法思想</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数学问题，数论问题，数据结构问题，几何问题，字符串问题，大数运算问题："><span class="toc-text">数学问题，数论问题，数据结构问题，几何问题，字符串问题，大数运算问题：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#五大常用算法"><span class="toc-text">五大常用算法</span></a></li></ol></li></ol>
     </div>
   </section>
 
