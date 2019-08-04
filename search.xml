@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>Linux</title>
+      <link href="/2019/08/04/Linux/"/>
+      <url>/2019/08/04/Linux/</url>
+      
+        <content type="html"><![CDATA[<h2 id="LINUX常用命令（基础）"><a href="#LINUX常用命令（基础）" class="headerlink" title="LINUX常用命令（基础）"></a>LINUX常用命令（基础）</h2><ul><li>man 对你熟悉或不熟悉的命令提供帮助解释<ul><li>eg:man ls 就可以查看ls相关的用法</li><li>注：按q键或者ctrl+c退出，在linux下可以使用ctrl+c终止当前程序运行。</li></ul></li><li>ls 查看目录或者文件的属*，列举出任一目录下面的文件<ul><li>eg: ls /usr/man</li><li>ls -l</li><li>d表示目录(directory)，如果是一个”-“表示是文件，如果是l则表示是一个连接文件(link)</li><li>表示文件或者目录许可权限.分别用可读(r)，可写(w)，可运行(x)。<a id="more"></a></li></ul></li><li>cp 拷贝文件<ul><li>eg: cp filename1 filename2 //把filename1拷贝成filename2</li><li>cp 1.c netseek/2.c //将1.c拷到netseek目录下命名为2.c</li></ul></li><li>rm 删除文件和目录<ul><li>eg: rm 1.c //将1.c这个文件删除</li></ul></li><li>mv 移走目录或者改文件名<ul><li>eg: mv filename1 filename2 //将filename1 改名为filename2</li><li>mv qib.tgz ../qib.tgz //移到上一级目录</li></ul></li><li>cd 改变当前目录 pwd 查看当前所在目录完整路径<ul><li>eg: pwd //查看当前所在目录路径</li><li>cd netseek //进入netseek这个目录</li><li>cd //退出当前目录</li></ul></li><li>cat，more命令<ul><li>将某个文件的内容显示出来。两个命令所不同的是:cat把文件内容一直打印出来，而 more则分屏显示</li><li>eg; cat&gt;1.c //就可以把代码粘帖到1.c文件里，按ctrl+d 保存代码。</li><li>cat 1.c 或more 1.c //都可以查看里面的内容。</li><li>gcc -o 1 1.c //将1.c编译成.exe文件，我们可以用此命编译出代码。</li></ul></li><li>chmod 命令 权限修改 用法：chmod 一位8进制数 filename。<ul><li>eg: chmod u+x filenmame //只想给自己运行，别人只能读</li><li>//u表示文件主人， g 表示文件文件所在组。 o 表示其他人 ;r 表可读，w 表可写，x 表可以运行</li><li>chmod g+x filename //同组的人来执行</li></ul></li><li>clear，date命令<ul><li>clear:清屏，相当与DOS下的cls;date:显示当前时间。</li></ul></li><li>mount 加载一个硬件设备<ul><li>用法:mount [参数] 要加载的设备 载入点</li><li>eg: mount /dev/cdrom</li><li>cd /mnt/cdrom //进入光盘目录</li></ul></li><li>su 在不退出登陆的情况下，切换到另外一个人的身份<ul><li>用法: su -l 用户名(如果用户名缺省，则切换到root状态)</li><li>eg:su -l netseek (切换到netseek这个用户，将提示输入密码)</li></ul></li><li>whoami，whereis，which，id<ul><li>//whoami:确认自己身份</li><li>//whereis:查询命令所在目录以及帮助文档所在目录</li><li>//which:查询该命令所在目录(类似whereis)</li><li>//id:打印出自己的UID以及GID。(UID:用户身份唯一标识。GID:用户组身份唯一标识。每一个用户只能有一个唯一的UID和 GID)</li><li>eg: whoami //显示你自已登陆的用户名</li><li>whereis bin 显示bin所在的目录，将显示为：/usr/local/bin</li><li>which bin</li></ul></li><li>grep，find<ul><li>grep:文本内容搜索;find:文件或者目录名以及权限属主等匹配搜索</li><li>eg: grep success * 　　 /*查找当前目录下面所有文件里面含有success字符的文件</li></ul></li><li>kill 可以杀死某<ul><li>个正在进行或者已经是dest状态的进程</li><li>eg; ps ax</li></ul></li><li>passwd 可以设置口令</li><li>history 用户用过的命令<ul><li>eg: history //可以显示用户过去使用的命令</li></ul></li><li>!! 执行最近一次的命令<ul><li>mkdir命令</li><li>eg: mkdir netseek //创建netseek这个目录</li></ul></li><li>tar 解压命令<ul><li>eg: tar -zxvf nmap-3.45.tgz //将这个解压到nmap-3.45这个目录里</li></ul></li><li>finger 可以让使用者查询一些其他使用者的资料<ul><li>eg: finger //查看所用用户的使用资料</li><li>finger root //查看root的资料</li><li>本文讲解了Linux创建文件命令的方法 ,希望对您的学习有所帮助。</li><li>创建文件夹</li><li>mkdir aaa</li><li>mkdir -p aaa</li><li>创建文件命令</li><li>vi foo.txt</li><li>emacs foo.txt</li><li>echo “aaaa” &gt; foo.txt</li><li>cat &gt; foo.txt</li><li>清除命令</li><li><blockquote><p>foo.txt</p></blockquote></li><li>mkdir /home/u1 创建文件夹/home/u1</li><li>chown oracle /home/u1 表示改变目录所有者为oracle账户;</li><li>chgrp dba /home/u1 改变/home/u1目录为dba所有;</li><li>chmod 755 /home/u1 表示oracle账户对/home/u1目录有755权限;</li><li>rmdir /home/u1 表示删除/home/u1目录</li><li>hostname可以查看linux的计算机名;</li><li>whoami可以查看当前用户;</li><li>pwd显示当前路径;</li><li>df查看系统的硬件信息</li><li>ls -lrt l表示显示详细列表，-t表示按时间排序,-r反向排序</li><li>cat orcl_ora_3436.trc|grep bucket</li><li>以下查看相关文件内容:</li><li>more /etc/oratab</li><li>cat /etc/passwd</li><li>cat /etc/group</li><li>以上是Linux创建文件命令的方法。</li><li>linux中创建文件用touch 例如：touch 1.txt</li><li>删除文件用rm 例如：rm -f 1.txt</li><li>创建目录用mkdir 例如：mkdir daiyuanqi</li><li>删除空目录用rmdir 例如：rmdir daiyuanqi （有东西的目录不能删）</li><li>删除装有东西的目录就用rm -rf 例如rm -rf XXX</li></ul></li></ul>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 服务器 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>CentOS7安装过程</title>
       <link href="/2019/08/04/CentOS7%E5%AE%89%E8%A3%85%E8%BF%87%E7%A8%8B/"/>
       <url>/2019/08/04/CentOS7%E5%AE%89%E8%A3%85%E8%BF%87%E7%A8%8B/</url>
@@ -139,9 +158,9 @@
       
         <tags>
             
-            <tag> 排序 </tag>
-            
             <tag> 算法 </tag>
+            
+            <tag> 排序 </tag>
             
         </tags>
       
@@ -166,9 +185,9 @@
       
         <tags>
             
-            <tag> 排序 </tag>
-            
             <tag> 算法 </tag>
+            
+            <tag> 排序 </tag>
             
         </tags>
       
@@ -193,9 +212,9 @@
       
         <tags>
             
-            <tag> 排序 </tag>
-            
             <tag> 算法 </tag>
+            
+            <tag> 排序 </tag>
             
         </tags>
       
@@ -220,9 +239,9 @@
       
         <tags>
             
-            <tag> 排序 </tag>
-            
             <tag> 算法 </tag>
+            
+            <tag> 排序 </tag>
             
         </tags>
       
@@ -247,9 +266,9 @@
       
         <tags>
             
-            <tag> 排序 </tag>
-            
             <tag> 算法 </tag>
+            
+            <tag> 排序 </tag>
             
         </tags>
       
@@ -274,9 +293,9 @@
       
         <tags>
             
-            <tag> 排序 </tag>
-            
             <tag> 算法 </tag>
+            
+            <tag> 排序 </tag>
             
         </tags>
       
