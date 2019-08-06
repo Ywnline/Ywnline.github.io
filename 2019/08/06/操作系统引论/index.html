@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   
-  <title>简单工厂模式 | Ywnline</title>
+  <title>操作系统引论 | Ywnline</title>
   
   
   <meta name="description" content="http://blog.yuewei.fun">
@@ -174,8 +174,8 @@
         
   
     <h1 class="title">
-      <a href="/2019/08/03/设计模式学习-简单工厂模式/">
-        简单工厂模式
+      <a href="/2019/08/06/操作系统引论/">
+        操作系统引论
       </a>
     </h1>
   
@@ -204,7 +204,7 @@
             <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2019-08-03</p>
+    <p>2019-08-06</p>
   </a>
 </div>
 
@@ -214,9 +214,9 @@
             
   
   <div class='new-meta-item category'>
-    <a href='/categories/设计模式/' rel="nofollow">
+    <a href='/categories/操作系统/' rel="nofollow">
       <i class="fas fa-folder-open" aria-hidden="true"></i>
-      <p>设计模式</p>
+      <p>操作系统</p>
     </a>
   </div>
 
@@ -256,22 +256,176 @@
 
       <section class="article typo">
         <div class="article-entry" itemprop="articleBody">
-          <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>工厂模式是对象的生产器，解耦用户对具体的依赖。通过封闭、继承、多态把程序的耦合度降低，使程序更加灵活，容易修改，并易于复用。简单工厂模式中，各种运算方法类实现了运算接口，在业务上如果想添加一种算法方法，只需要增加一个实现接口的类，并且在工厂的类型中添加一个判断。这种设计适合用于业务逻辑并不多的情况，如果业务逻辑非常多，那么工作累就是一个很长的swuth…case结构这时候使用工厂模式会比较合适。</p>
-<a id="more"></a>
+          <p>操作系统（OS）是计算机上第一层软件，对硬件系统的首次扩充。主要作用管理好这些设备，提高利用率和吞吐量，并为用户和应用进程提供一个简单的接口，便于使用。</p>
+<a id="more"></a> 
 
-<h2 id="主要类"><a href="#主要类" class="headerlink" title="主要类"></a>主要类</h2><ul>
-<li>base - interface</li>
-<li>concreteA - concrete class A</li>
-<li>concreteB - concrete class B    </li>
-<li>factory - in: choice; out: base</li>
+<hr>
+<h2 id="操作系统的作用和目标"><a href="#操作系统的作用和目标" class="headerlink" title="操作系统的作用和目标"></a>操作系统的作用和目标</h2><h3 id="操作系统目标"><a href="#操作系统目标" class="headerlink" title="操作系统目标"></a>操作系统目标</h3><ul>
+<li>方便性<ul>
+<li>未配置OS的需要机器语言</li>
 </ul>
-<h2 id="优势"><a href="#优势" class="headerlink" title="优势"></a>优势</h2><p>工厂类中包含了必要的逻辑判断，根据客户端的选择条件实例化相应的类，对于客户端来说，去除了与具产品的依赖</p>
-<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line">设计一个计算器</span><br><span class="line">*/</span><br><span class="line">//Operation 操作接口</span><br><span class="line">type Operation interface &#123;</span><br><span class="line">	SetNumber(float64, float64)</span><br><span class="line">	GetResult() float64</span><br><span class="line">&#125;</span><br><span class="line">//BaseOperation 基础类</span><br><span class="line">type BaseOperation struct &#123;</span><br><span class="line">	Operation</span><br><span class="line">	NumberA float64</span><br><span class="line">	NumberB float64</span><br><span class="line">&#125;</span><br><span class="line">func (bo *BaseOperation) SetNumber(numberA, numberB float64) &#123;</span><br><span class="line">	bo.NumberA = numberA</span><br><span class="line">	bo.NumberB = numberB</span><br><span class="line">&#125;</span><br><span class="line">//OperationAdd 加法运算</span><br><span class="line">type OperationAdd struct &#123;</span><br><span class="line">	BaseOperation</span><br><span class="line">&#125;</span><br><span class="line">func (oa OperationAdd) GetResult() float64 &#123;</span><br><span class="line">	return oa.NumberA + oa.NumberB</span><br><span class="line">&#125;</span><br><span class="line">//OperationSub 减法运算类</span><br><span class="line">type OperationSub struct &#123;</span><br><span class="line">	BaseOperation</span><br><span class="line">&#125;</span><br><span class="line">func (os OperationSub) GetResult() float64 &#123;</span><br><span class="line">	return os.NumberA - os.NumberB</span><br><span class="line">&#125;</span><br><span class="line">    //OperationFactory 工厂类</span><br><span class="line">type OperationFactory struct&#123;&#125;</span><br><span class="line">func (of OperationFactory) CreateOperation(oper string) Operation &#123;</span><br><span class="line">	switch oper &#123;</span><br><span class="line">	default:</span><br><span class="line">		return nil</span><br><span class="line">	case &quot;+&quot;:</span><br><span class="line">		return new(OperationAdd)</span><br><span class="line">	case &quot;-&quot;:</span><br><span class="line">		return new(OperationSub)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">//OperationUsage 工厂操作</span><br><span class="line">func OperationUsage() &#123;</span><br><span class="line">factory := new(OperationFactory)</span><br><span class="line">operation := factory.CreateOperation(&quot;+&quot;)</span><br><span class="line">operation.SetNumber(1, 2)</span><br><span class="line">fmt.Printf(&quot;this is add operation, 1+2=%v\n&quot;, operation.GetResult())</span><br><span class="line">operation = factory.CreateOperation(&quot;-&quot;)</span><br><span class="line">operation.SetNumber(2, 1)</span><br><span class="line">fmt.Printf(&quot;this is sub operation, 2-1=%v\n&quot;, operation.GetResult())</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line">设计一个工厂来生产各种厂商的手机</span><br><span class="line">其中初始的厂商有小米，苹果，华为</span><br><span class="line">*/</span><br><span class="line">//Phone interface</span><br><span class="line">type Phone interface &#123;</span><br><span class="line">	ShowBrand()</span><br><span class="line">&#125;</span><br><span class="line">//IPhone apple</span><br><span class="line">type IPhone struct &#123;</span><br><span class="line">&#125;</span><br><span class="line">func (phone IPhone) ShowBrand() &#123;</span><br><span class="line">	fmt.Println(&quot;[Phone Brand]: Apple&quot;)</span><br><span class="line">&#125;</span><br><span class="line">//HPhone huawei</span><br><span class="line">type HPhone struct &#123;</span><br><span class="line">&#125;</span><br><span class="line">func (phone HPhone) ShowBrand() &#123;</span><br><span class="line">	fmt.Println(&quot;[Phone Brand]: Huawei&quot;)</span><br><span class="line">&#125;</span><br><span class="line">//XPhone xiaomi</span><br><span class="line">type XPhone struct &#123;</span><br><span class="line">&#125;</span><br><span class="line">func (phone XPhone) ShowBrand() &#123;</span><br><span class="line">	fmt.Println(&quot;[Phone Brand]: Xiaomi&quot;)</span><br><span class="line">&#125;</span><br><span class="line">type PhoneFactory struct&#123;&#125;</span><br><span class="line">func (factory PhoneFactory) CreatePhone(brand string) Phone &#123;</span><br><span class="line">	switch brand &#123;</span><br><span class="line">	default:</span><br><span class="line">		return nil</span><br><span class="line">	case &quot;HW&quot;:</span><br><span class="line">		return new(HPhone)</span><br><span class="line">	case &quot;XM&quot;:</span><br><span class="line">		return new(XPhone)</span><br><span class="line">	case &quot;PG&quot;:</span><br><span class="line">		return new(IPhone)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">func PhoneUsage() &#123;</span><br><span class="line">	factory := PhoneFactory&#123;&#125;</span><br><span class="line">	phone := factory.CreatePhone(&quot;HW&quot;)</span><br><span class="line">	phone.ShowBrand()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">func main() &#123;</span><br><span class="line">	OperationUsage()</span><br><span class="line">	PhoneUsage()</span><br><span class="line">&#125;</span><br><span class="line">result :</span><br><span class="line">this is add operation, 1+2=3</span><br><span class="line">this is sub operation, 2-1=1</span><br><span class="line">[Phone Brand]: Huawei</span><br></pre></td></tr></table></figure>
-
+</li>
+<li>有效性<ul>
+<li>提高系统资源利用率</li>
+<li>提高系统吞吐量：合理组织计算机的工作流程，加速程序运行，缩短运行周期</li>
+</ul>
+</li>
+<li>可扩充性<ul>
+<li>可扩充性好坏与OS结构十分紧密联系 OS结构发展：无结构···模块化结构···层次结构···微内核结构（可以方便添加新的功能模块）</li>
+</ul>
+</li>
+<li>开放性<ul>
+<li>遵循世界标准规范，特别是遵循开放系统互连OSI国际标准</li>
+</ul>
+</li>
+</ul>
+<h3 id="操作系统作用"><a href="#操作系统作用" class="headerlink" title="操作系统作用"></a>操作系统作用</h3><ul>
+<li>OS作为用户与计算机硬件系统之间的接口<ul>
+<li>OS处于用户与计算机系统之间，用户通过OS来使用计算机系统</li>
+<li>通过命令、系统调用、图标-窗口方式来完成通信</li>
+</ul>
+</li>
+<li>OS作为计算机系统资源的管理者<ul>
+<li>这些资源分为四大类：处理机、存储器、I/O设备、文件（数据和程序）</li>
+<li>处理机 ： 用户分配和控制处理机</li>
+<li>存储器 ： 主要负责内存分配和回收</li>
+<li>I/O设备： 负责I/O设备的分配（回收）操作</li>
+<li>文件管理： 用于实现对文件的存取、共享和保护</li>
+</ul>
+</li>
+<li>OS 实现了对计算机资源的抽象<ul>
+<li>完全无软件的计算机系统（裸机）</li>
+<li>裸机上铺设I/O设备称为扩充器或虚拟机</li>
+<li>I/O 设备实现对计算机硬件操作的第一层抽象</li>
+<li>文件管理实现对计算机硬件操作的第二层抽象（功能更强的虚拟机）</li>
+</ul>
+</li>
+</ul>
+<h3 id="推动操作系统发展的主要动力"><a href="#推动操作系统发展的主要动力" class="headerlink" title="推动操作系统发展的主要动力"></a>推动操作系统发展的主要动力</h3><ul>
+<li>不断提高计算机的利用率</li>
+<li>方便用户</li>
+<li>硬件的不断更新</li>
+<li>计算机体系结构的不断发展</li>
+<li>不断提出新的应用需求</li>
+</ul>
+<hr>
+<h2 id="操作系统的发展过程"><a href="#操作系统的发展过程" class="headerlink" title="操作系统的发展过程"></a>操作系统的发展过程</h2><h3 id="未配置操作系统的计算机系统"><a href="#未配置操作系统的计算机系统" class="headerlink" title="未配置操作系统的计算机系统"></a>未配置操作系统的计算机系统</h3><ul>
+<li>人工操作方式<ul>
+<li>人工操作穿孔的纸带（卡片）</li>
+<li>缺点:<ul>
+<li>用户独占全机</li>
+<li>CPU等待人工操作</li>
+<li>人工操作方式严重降低了计算机利用率</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>脱机输入/输出方式<ul>
+<li>将原有纸带装入纸带输入机，在一台外围机的控制下把纸袋上的数据（程序）放到磁盘上</li>
+<li>有点：<ul>
+<li>减少CPU空闲时间</li>
+<li>提高I/O的速度</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="单道批处理系统"><a href="#单道批处理系统" class="headerlink" title="单道批处理系统"></a>单道批处理系统</h3><ul>
+<li><p>单道批处理系统的处理流程</p>
+<ul>
+<li>监督程序将磁带上的作业一个一个顺序执行</li>
+</ul>
+</li>
+<li><p>单道批处理系统缺点</p>
+<ul>
+<li>系统中资源得不到重复利用</li>
+</ul>
+</li>
+</ul>
+<h3 id="多道批处理系统"><a href="#多道批处理系统" class="headerlink" title="多道批处理系统"></a>多道批处理系统</h3><ul>
+<li>多道批处理系统处理流程<ul>
+<li>用户提交作业在外存上，排成一个队列（后备队列），作业调度根据一定算法，一次取多个调入内存，减少CPU的空当时间</li>
+</ul>
+</li>
+<li>多道批处理系统的缺点<ul>
+<li>资源利用率高</li>
+<li>系统吞吐量达<ul>
+<li>CPU和其他资源保持“忙碌”状态</li>
+<li>仅当作业完成、或运行不下去时在进行切换，系统开销小</li>
+</ul>
+</li>
+<li>平均周转时间长</li>
+<li>无交互能力</li>
+</ul>
+</li>
+</ul>
+<h3 id="多道批处理系统需要解决的问题"><a href="#多道批处理系统需要解决的问题" class="headerlink" title="多道批处理系统需要解决的问题"></a>多道批处理系统需要解决的问题</h3><ul>
+<li>问题：<ul>
+<li>处理机挣用问题</li>
+<li>内存分配和保护问题</li>
+<li>I/O 设备分配问题</li>
+<li>文件的组织和管理问题</li>
+<li>作业管理问题</li>
+<li>用户与系统的接口问题</li>
+</ul>
+</li>
+</ul>
+<h3 id="分时系统"><a href="#分时系统" class="headerlink" title="分时系统"></a>分时系统</h3><ul>
+<li><p>分时系统的引入</p>
+<ul>
+<li>人——机交互</li>
+<li>共享主机</li>
+<li>分时系统是指，在一台计算机上连接多个鼠标、显示器的终端所组成的系统，该系统运行多个用户同时访问，共享主机资源</li>
+</ul>
+</li>
+<li><p>分时系统的关键问题</p>
+<ul>
+<li>及时接受</li>
+<li>及时处理</li>
+</ul>
+</li>
+<li><p>分时系统的特新</p>
+<ul>
+<li>多路性</li>
+<li>独立性</li>
+<li>及时性</li>
+<li>交互性</li>
+</ul>
+</li>
+</ul>
+<h3 id="实时系统"><a href="#实时系统" class="headerlink" title="实时系统"></a>实时系统</h3><ul>
+<li><p>时间作为关键参数，收到某些信号“及时”、“实时”的反响</p>
+</li>
+<li><p>实时系统的类型</p>
+<ul>
+<li>工业控制系统</li>
+<li>信息查询系统</li>
+<li>多媒体系统</li>
+<li>嵌入式系统</li>
+</ul>
+</li>
+<li><p>实时任务类型</p>
+<ul>
+<li>周期性和非周期性实时任务</li>
+<li>硬实时任务和软实时任务 （必须小于截至截止时间，不一定小于截止时间）</li>
+</ul>
+</li>
+<li><p>实时系统与分时系统比较</p>
+<ul>
+<li>多路性</li>
+<li>独立性</li>
+<li>及时性</li>
+<li>交互性</li>
+<li>可靠性</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="微机操系统作发展史"><a href="#微机操系统作发展史" class="headerlink" title="微机操系统作发展史"></a>微机操系统作发展史</h2><ul>
+<li>单用户单任务操作系统</li>
+<li>单用户多任务操作系统</li>
+<li>多用户多任务操作系统</li>
+</ul>
 
         </div>
         
@@ -283,10 +437,10 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-08-03T16:38:09+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-08-06T11:47:25+08:00">
   <a class='notlink'>
     <i class="fas fa-clock" aria-hidden="true"></i>
-    <p>last updated at Aug 3, 2019</p>
+    <p>last updated at Aug 6, 2019</p>
   </a>
 </div>
 
@@ -295,7 +449,7 @@
         
           
   
-  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/设计模式/" rel="nofollow"><i class="fas fa-hashtag" aria-hidden="true"></i>&nbsp;<p>设计模式</p></a></div>
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/操作系统/" rel="nofollow"><i class="fas fa-hashtag" aria-hidden="true"></i>&nbsp;<p>操作系统</p></a></div>
 
 
         
@@ -308,7 +462,7 @@
       
         <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer"
           
-          href="http://connect.qq.com/widget/shareqq/index.html?url=http://blog.yuewei.fun/2019/08/03/设计模式学习-简单工厂模式/&title=简单工厂模式 | Ywnline&summary=概述工厂模式是对象的生产器，解耦用户对具体的依赖。通过封闭、继承、多态把程序的耦合度降低，使程序更加灵活，容易修改，并易于复用。简单工厂模式中，各种运算方法类实现了运算接口，在业务上如果想添加一种算法方法，只需要增加一个实现接口的类，并且在工厂的类型中添加一个判断。这种设计适合用于业务逻辑并不多的情况，如果业务逻辑非常多，那么工作累就是一个很长的swuth…case结构这时候使用工厂模式会比较合适。"
+          href="http://connect.qq.com/widget/shareqq/index.html?url=http://blog.yuewei.fun/2019/08/06/操作系统引论/&title=操作系统引论 | Ywnline&summary=操作系统（OS）是计算机上第一层软件，对硬件系统的首次扩充。主要作用管理好这些设备，提高利用率和吞吐量，并为用户和应用进程提供一个简单的接口，便于使用。"
           
           >
           
@@ -320,7 +474,7 @@
       
         <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer"
           
-          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://blog.yuewei.fun/2019/08/03/设计模式学习-简单工厂模式/&title=简单工厂模式 | Ywnline&summary=概述工厂模式是对象的生产器，解耦用户对具体的依赖。通过封闭、继承、多态把程序的耦合度降低，使程序更加灵活，容易修改，并易于复用。简单工厂模式中，各种运算方法类实现了运算接口，在业务上如果想添加一种算法方法，只需要增加一个实现接口的类，并且在工厂的类型中添加一个判断。这种设计适合用于业务逻辑并不多的情况，如果业务逻辑非常多，那么工作累就是一个很长的swuth…case结构这时候使用工厂模式会比较合适。"
+          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://blog.yuewei.fun/2019/08/06/操作系统引论/&title=操作系统引论 | Ywnline&summary=操作系统（OS）是计算机上第一层软件，对硬件系统的首次扩充。主要作用管理好这些设备，提高利用率和吞吐量，并为用户和应用进程提供一个简单的接口，便于使用。"
           
           >
           
@@ -332,7 +486,7 @@
       
         <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer"
           
-          href="http://service.weibo.com/share/share.php?url=http://blog.yuewei.fun/2019/08/03/设计模式学习-简单工厂模式/&title=简单工厂模式 | Ywnline&summary=概述工厂模式是对象的生产器，解耦用户对具体的依赖。通过封闭、继承、多态把程序的耦合度降低，使程序更加灵活，容易修改，并易于复用。简单工厂模式中，各种运算方法类实现了运算接口，在业务上如果想添加一种算法方法，只需要增加一个实现接口的类，并且在工厂的类型中添加一个判断。这种设计适合用于业务逻辑并不多的情况，如果业务逻辑非常多，那么工作累就是一个很长的swuth…case结构这时候使用工厂模式会比较合适。"
+          href="http://service.weibo.com/share/share.php?url=http://blog.yuewei.fun/2019/08/06/操作系统引论/&title=操作系统引论 | Ywnline&summary=操作系统（OS）是计算机上第一层软件，对硬件系统的首次扩充。主要作用管理好这些设备，提高利用率和吞吐量，并为用户和应用进程提供一个简单的接口，便于使用。"
           
           >
           
@@ -356,40 +510,21 @@
         
             <div class="prev-next">
                 
-                    <section class="prev">
-                        <span class="art-item-left">
-                            <h6><i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;Previous</h6>
-                            <h4>
-                                <a href="/2019/08/03/策略模式/" rel="prev" title="策略模式">
-                                  
-                                      策略模式
-                                  
-                                </a>
-                            </h4>
-                            
-                                
-                                <h6 class="tags">
-                                    <a class="tag" href="/tags/设计模式/"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>设计模式</a>
-                                </h6>
-                            
-                        </span>
-                    </section>
-                
                 
                     <section class="next">
                         <span class="art-item-right" aria-hidden="true">
                             <h6>Next&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i></h6>
                             <h4>
-                                <a href="/2019/08/03/运输层/" rel="prev" title="运输层">
+                                <a href="/2019/08/04/Linux/" rel="prev" title="Linux">
                                     
-                                        运输层
+                                        Linux
                                     
                                 </a>
                             </h4>
                             
                                 
                                 <h6 class="tags">
-                                    <a class="tag" href="/tags/网络/"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>网络</a>
+                                    <a class="tag" href="/tags/服务器/"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>服务器</a>
                                 </h6>
                             
                         </span>
@@ -420,7 +555,7 @@
 
   <script>
     window.subData = {
-      title: '简单工厂模式',
+      title: '操作系统引论',
       tools: true
     }
   </script>
@@ -492,7 +627,7 @@
 </header>
 
     <div class='content pure'>
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#概述"><span class="toc-text">概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#主要类"><span class="toc-text">主要类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#优势"><span class="toc-text">优势</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#代码实现"><span class="toc-text">代码实现</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#操作系统的作用和目标"><span class="toc-text">操作系统的作用和目标</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#操作系统目标"><span class="toc-text">操作系统目标</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#操作系统作用"><span class="toc-text">操作系统作用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#推动操作系统发展的主要动力"><span class="toc-text">推动操作系统发展的主要动力</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#操作系统的发展过程"><span class="toc-text">操作系统的发展过程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#未配置操作系统的计算机系统"><span class="toc-text">未配置操作系统的计算机系统</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#单道批处理系统"><span class="toc-text">单道批处理系统</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多道批处理系统"><span class="toc-text">多道批处理系统</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多道批处理系统需要解决的问题"><span class="toc-text">多道批处理系统需要解决的问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#分时系统"><span class="toc-text">分时系统</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实时系统"><span class="toc-text">实时系统</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#微机操系统作发展史"><span class="toc-text">微机操系统作发展史</span></a></li></ol>
     </div>
   </section>
 
