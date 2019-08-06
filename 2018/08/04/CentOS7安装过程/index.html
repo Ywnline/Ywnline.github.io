@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   
-  <title>Category: 计算应网络 | Ywnline</title>
+  <title>CentOS7安装过程 | Ywnline</title>
   
   
   <meta name="description" content="http://blog.yuewei.fun">
@@ -158,25 +158,12 @@
 
   <div class="l_body nocover">
     <div class='body-wrapper'>
-      
-<div class='l_main'>
+      <div class='l_main'>
   
-    
-      
-  <section class="post-list">
-    
-      
-        
-          
-        
-      
-    
-    
-      
-        
-          <div class='post-wrapper'>
-            <article class="post reveal ">
+
   
+    <article id="post" class="post white-box article-type-post" itemscope itemprop="blogPost">
+      
 
 
   <section class='meta'>
@@ -185,11 +172,13 @@
     <div class="meta" id="header-meta">
       
         
-  <h2 class="title">
-    <a href="/2019/08/03/运输层/">
-      运输层
-    </a>
-  </h2>
+  
+    <h1 class="title">
+      <a href="/2018/08/04/CentOS7安装过程/">
+        CentOS7安装过程
+      </a>
+    </h1>
+  
 
 
       
@@ -215,7 +204,7 @@
             <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2019-08-03</p>
+    <p>2018-08-04</p>
   </a>
 </div>
 
@@ -223,19 +212,24 @@
         
           
             
-  
-  <div class='new-meta-item category'>
-    <a href='/categories/计算应网络/' rel="nofollow">
-      <i class="fas fa-folder-open" aria-hidden="true"></i>
-      <p>计算应网络</p>
-    </a>
-  </div>
-
 
           
         
           
             
+  
+    <div class="new-meta-item browse busuanzi">
+      <a class='notlink'>
+        <i class="fas fa-eye" aria-hidden="true"></i>
+        <p>
+          <span id="busuanzi_value_page_pv">
+            <i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i>
+          </span>
+        </p>
+      </a>
+    </div>
+  
+
 
           
         
@@ -252,50 +246,252 @@
   </section>
 
 
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      <h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><ul>
-<li>运输层为相互通信的应用进程提供逻辑通信</li>
-<li>端口和套接字的意义</li>
-<li>无连接的UDP的特点</li>
-<li>面向连接的TCP的特点</li>
-<li>在不可靠的网络上实现可靠网络的传输原理，停止等待协议和ARQ协议</li>
-<li>TCP的滑动窗口、流量控制、拥塞控制和连接管理</li></ul>
-      
-        <div class="readmore">
-          <a href="/2019/08/03/运输层/" class="flat-box">
-            <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
-            Read More
-          </a>
+      <section class="article typo">
+        <div class="article-entry" itemprop="articleBody">
+          <h2 id="安装UltraISO"><a href="#安装UltraISO" class="headerlink" title="安装UltraISO"></a>安装UltraISO</h2><p>官网搜索next</p>
+<hr>
+<h2 id="从U盘安装CentOS7-3教程"><a href="#从U盘安装CentOS7-3教程" class="headerlink" title="从U盘安装CentOS7.3教程"></a>从U盘安装CentOS7.3教程</h2><ul>
+<li>准备工作:<ul>
+<li>一台没系统的普通电脑<ul>
+<li>u盘一个（大于1G，最小安装的话不超过1G，根据选择系统大小匹配U盘即可）</li>
+<li>CentOS7.3 iso文件一个</li>
+<li>UltraISO工具</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<a id="more"></a>
+<ul>
+<li><p>制作U盘</p>
+<ul>
+<li>使用UltraISO工具 文件-》打开 选择你的ISO文件</li>
+<li>先使用UltraISO刻录镜像至U盘内（PS:刻录的时候隐藏启动分区可以选成无，里面的packages文件夹可以删除，这个文件夹是没什么用的，而且大小挺大的，因为安装的时候有镜像在U盘内）</li>
+</ul>
+</li>
+<li><p>开始安装</p>
+<ul>
+<li>把制作好的U盘插入需要安装Linux的电脑，把电脑的第一启动方式设置为U盘启动之后 会进入选择安装界面</li>
+<li>接下来就是最重要的地方，关系着你能不能安装成功 我就是在这里卡了好久</li>
+<li>先移动到第二项test &amp;Install</li>
+<li>然后按e键编辑路径</li>
+<li>将vmlinuz initrd=initrd.img inst.stage2=hd:LABEL=CentOS\x207\x20x86_64 quiet改成vmlinuz initrd=initrd.img linux dd quiet</li>
+<li>ctrl+x</li>
+<li>然后就能在显示出的列表中 查看你的硬盘信息，很清晰就能知道哪一个是你的U盘（一般显示的几个 格式为NTFS的都是你电脑自身的盘符，另外的一个就是你的U盘，记下你的U盘的盘符名字 我的就是sda4）使用ctrl+alt+del 重新启动电脑，重复上面的步骤 这一次 将vmlinuz initrd=initrd.img inst.stage2=hd:LABEL=CentOS\x207\x20x86_64 quiet改成vmlinuz initrd=initrd.img inst.stage2=hd:/dev/sda4（你自己的U盘盘符） quiet ctrl+x 等待安装程序启动，进行CentOS的安装</li>
+</ul>
+</li>
+<li><p>Linux引导安装</p>
+<ul>
+<li>选择中文安装</li>
+<li>选择时区，设置时间，能够在网络与主机里面连接wifi之后 在时间设置里面使用网络时间</li>
+<li>选择软件的安装源 U盘安装一般是默认选择 一般是Packages文件夹，不用管</li>
+<li>比较常用的是最小化安装（安装快，只有命令行操作）</li>
+<li>带有桌面的安装（一些配置和使用都可以图形化操作，较好用）</li>
+<li>服务器版安装（特定组件可以省掉自己安装的很多问题），这里选择最小化安装，另外可以根据自己的需要从右面选择部分组件安装</li>
+<li>刚开始接触Linux的朋友建议使用GHOME图形操作界面，好上手</li>
+<li>网络和主机名里面配置网络信息</li>
+<li>我这里是用的虚拟机安装 所以安装位置只能选择虚拟机，但是在真机安装的时候 需要选择具体的安装位置，如果之前电脑用过WIndows 硬盘已经分区了 需要进行磁盘释放，之后选择安装位置</li>
+<li>全部信息确认完毕之后 就可以开始安装了</li>
+<li>在这里可以新建用户 设置root操作 等待下方安装进度完成 之后就能进入Linux系统了</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="解决CentOS7-用U盘-无法进入安装界面"><a href="#解决CentOS7-用U盘-无法进入安装界面" class="headerlink" title="解决CentOS7 用U盘 无法进入安装界面"></a>解决CentOS7 用U盘 无法进入安装界面</h2><ul>
+<li>这是用uefi方式启动的CentOS的版本是1708</li>
+<li>首先按”e”键进入编辑界面将inst.stage2=hd:LABEL=CentOS\x207\x20x86_64  改为linux dd</li>
+<li>按”ctrl + x”执行</li>
+<li>然后找到那个驱动器</li>
+<li>这里是sdd4</li>
+<li>重新进入引导界面，修改以下信息</li>
+<li>从inst.stage2=hd:开始，修改为/dev/sdd4 (这是自己的U盘位置)</li>
+<li>按”ctrl + x”</li>
+<li>稍等片刻，就可以安装CentOS7了</li>
+</ul>
+
         </div>
+        
+          
+
+
+  <section class='meta' id="footer-meta">
+    <hr>
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-08-06T18:28:24+08:00">
+  <a class='notlink'>
+    <i class="fas fa-clock" aria-hidden="true"></i>
+    <p>last updated at Aug 6, 2019</p>
+  </a>
+</div>
+
+        
+      
+        
+          
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/服务器/" rel="nofollow"><i class="fas fa-hashtag" aria-hidden="true"></i>&nbsp;<p>服务器</p></a></div>
+
+
+        
+      
+        
+          
+  <div class="new-meta-item share -mob-share-list">
+  <div class="-mob-share-list share-body">
+    
+      
+        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer"
+          
+          href="http://connect.qq.com/widget/shareqq/index.html?url=http://blog.yuewei.fun/2018/08/04/CentOS7安装过程/&title=CentOS7安装过程 | Ywnline&summary=安装UltraISO官网搜索next
+
+从U盘安装CentOS7.3教程
+准备工作:
+一台没系统的普通电脑
+u盘一个（大于1G，最小安装的话不超过1G，根据选择系统大小匹配U盘即可）
+CentOS7.3 iso文件一个
+UltraISO工具
+
+
+
+
+"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/qq.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer"
+          
+          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://blog.yuewei.fun/2018/08/04/CentOS7安装过程/&title=CentOS7安装过程 | Ywnline&summary=安装UltraISO官网搜索next
+
+从U盘安装CentOS7.3教程
+准备工作:
+一台没系统的普通电脑
+u盘一个（大于1G，最小安装的话不超过1G，根据选择系统大小匹配U盘即可）
+CentOS7.3 iso文件一个
+UltraISO工具
+
+
+
+
+"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/qzone.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer"
+          
+          href="http://service.weibo.com/share/share.php?url=http://blog.yuewei.fun/2018/08/04/CentOS7安装过程/&title=CentOS7安装过程 | Ywnline&summary=安装UltraISO官网搜索next
+
+从U盘安装CentOS7.3教程
+准备工作:
+一台没系统的普通电脑
+u盘一个（大于1G，最小安装的话不超过1G，根据选择系统大小匹配U盘即可）
+CentOS7.3 iso文件一个
+UltraISO工具
+
+
+
+
+"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/weibo.png">
+          
+        </a>
+      
+    
+  </div>
+</div>
+
+
+
+        
       
     </div>
-    
-      <div class="full-width auto-padding tags">
-        
-          <a href="/tags/网络/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>网络</a>
-        
-      </div>
-    
   </section>
-</article>
 
-          </div>
+
         
-      
-    
-  </section>
+        
+            <div class="prev-next">
+                
+                    <section class="prev">
+                        <span class="art-item-left">
+                            <h6><i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;Previous</h6>
+                            <h4>
+                                <a href="/2019/08/02/更新blog/" rel="prev" title="更新">
+                                  
+                                      更新
+                                  
+                                </a>
+                            </h4>
+                            
+                        </span>
+                    </section>
+                
+                
+                    <section class="next">
+                        <span class="art-item-right" aria-hidden="true">
+                            <h6>Next&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i></h6>
+                            <h4>
+                                <a href="/2017/08/03/策略模式/" rel="prev" title="策略模式">
+                                    
+                                        策略模式
+                                    
+                                </a>
+                            </h4>
+                            
+                                
+                                <h6 class="tags">
+                                    <a class="tag" href="/tags/设计模式/"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>设计模式</a>
+                                </h6>
+                            
+                        </span>
+                    </section>
+                
+            </div>
+        
+      </section>
+    </article>
   
-    
-    <!-- 根据主题中的设置决定是否在archive中针对摘要部分的MathJax公式加载mathjax.js文件 -->
-    
-    
+
+  
+    <!-- 显示推荐文章和评论 -->
+
+
 
   
 
 
-    
   
+
+
+
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+
+
+  <script>
+    window.subData = {
+      title: 'CentOS7安装过程',
+      tools: true
+    }
+  </script>
+
 
 </div>
 <aside class='l_side'>
@@ -353,6 +549,20 @@
           
           
             
+  <section class='widget toc-wrapper'>
+    
+<header class='pure'>
+  <div><i class="fas fa-list fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;TOC</div>
+  
+    <div class='wrapper'><a class="s-toc rightBtn" rel="external nofollow noopener noreferrer" href="javascript:void(0)"><i class="fas fa-thumbtack fa-fw"></i></a></div>
+  
+</header>
+
+    <div class='content pure'>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#安装UltraISO"><span class="toc-text">安装UltraISO</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#从U盘安装CentOS7-3教程"><span class="toc-text">从U盘安装CentOS7.3教程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解决CentOS7-用U盘-无法进入安装界面"><span class="toc-text">解决CentOS7 用U盘 无法进入安装界面</span></a></li></ol>
+    </div>
+  </section>
+
 
           
         
