@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   
-  <title>常用排序 | Ywnline</title>
+  <title>Redis学习 | Ywnline</title>
   
   
   <meta name="description" content="http://blog.yuewei.fun">
@@ -152,8 +152,8 @@
         
   
     <h1 class="title">
-      <a href="/2018/08/03/排序/">
-        常用排序
+      <a href="/2019/08/08/Redis学习/">
+        Redis学习
       </a>
     </h1>
   
@@ -182,7 +182,7 @@
             <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2018-08-03</p>
+    <p>2019-08-08</p>
   </a>
 </div>
 
@@ -192,9 +192,9 @@
             
   
   <div class='new-meta-item category'>
-    <a href='/categories/算法排序/' rel="nofollow">
+    <a href='/categories/数据库/' rel="nofollow">
       <i class="fas fa-folder-open" aria-hidden="true"></i>
-      <p>算法排序</p>
+      <p>数据库</p>
     </a>
   </div>
 
@@ -234,23 +234,121 @@
 
       <section class="article typo">
         <div class="article-entry" itemprop="articleBody">
-          <h2 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h2><p>思路分析：在要排序的切片中，对当前还未排好的序列，从前往后对相邻的两个元素依次进行比较和调整，让较大的数往下沉，较小的往上冒。即，每当两相邻的元素比较后发现它们的排序与排序要求相反时，就将它们互换。</p>
+          <h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><h3 id="Redis安装"><a href="#Redis安装" class="headerlink" title="Redis安装"></a>Redis安装</h3><p>不在赘述、各种环境各种版本网上随便一搜都可以</p>
+<h3 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis-server redis.windows.conf</span><br></pre></td></tr></table></figure>
+
+<h3 id="Redis-命令行客户端"><a href="#Redis-命令行客户端" class="headerlink" title="Redis 命令行客户端"></a>Redis 命令行客户端</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis-cli -h IP -p port</span><br></pre></td></tr></table></figure>
+
 <a id="more"></a>
 
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line"></span><br><span class="line">import (</span><br><span class="line">	&quot;fmt&quot;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">var sli = []int&#123;1, 43, 54, 62, 21, 66, 32, 78, 36, 76, 39&#125;</span><br><span class="line"></span><br><span class="line">func bubbleSort(sli []int) []int &#123;</span><br><span class="line">	len := len(sli)</span><br><span class="line">	//该层循环控制 需要冒泡的轮数</span><br><span class="line">	for i := 1; i &lt; len; i++ &#123;</span><br><span class="line">		//该层循环用来控制每轮 冒出一个数 需要比较的次数</span><br><span class="line">		for j := 0; j &lt; len-1; j++ &#123;</span><br><span class="line">			if sli[i] &lt; sli[j] &#123;</span><br><span class="line">				sli[i], sli[j] = sli[j], sli[i]</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	return sli</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">	res := bubbleSort(sli)</span><br><span class="line">	fmt.Println(res)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <hr>
-<h2 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h2><p>思路分析：在要排序的切片中，选出最小的一个元素与第一个位置的元素交换。然后在剩下的元素当中再找最小的与第二个位置的元素交换，如此循环到倒数第二个元素和最后一个元素比较为止。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line"></span><br><span class="line">import (</span><br><span class="line">	&quot;fmt&quot;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">var sli = []int&#123;1, 43, 54, 62, 21, 66, 32, 78, 36, 76, 39&#125;</span><br><span class="line"></span><br><span class="line">func selectSort(sli []int) []int &#123;</span><br><span class="line">	//双重循环完成，外层控制轮数，内层控制比较次数</span><br><span class="line">	len := len(sli)</span><br><span class="line">	for i := 0; i &lt; len-1; i++ &#123;</span><br><span class="line">		//先假设最小的值的位置</span><br><span class="line">		k := i</span><br><span class="line">		for j := i + 1; j &lt; len; j++ &#123;</span><br><span class="line">			//sli[k] 是当前已知的最小值</span><br><span class="line">			if sli[k] &gt; sli[j] &#123;</span><br><span class="line">				//比较，发现更小的,记录下最小值的位置；并且在下次比较时采用已知的最小值进行比较。</span><br><span class="line">				k = j</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		//已经确定了当前的最小值的位置，保存到 k 中。如果发现最小值的位置与当前假设的位置 i 不同，则位置互换即可。</span><br><span class="line">		if k != i &#123;</span><br><span class="line">			sli[k], sli[i] = sli[i], sli[k]</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	return sli</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="入门"><a href="#入门" class="headerlink" title="入门"></a>入门</h2><h3 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h3><ul>
+<li><p>获得符合规则的键名列表</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">KEYS pattern</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>判断一个键是否存在</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">EXISTS key</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>删除键</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DEL key [key ...]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>获取键值得数据类型</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TYPE key</span><br></pre></td></tr></table></figure>
 
+</li>
+</ul>
 <hr>
-<h2 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h2><p>思路分析：在要排序的一切片中，假设前面的元素已经是排好顺序的，现在要把第n个元素插到前面的有序切片中，使得这n个元素也是排好顺序的。如此反复循环，直到全部排好顺序。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line"></span><br><span class="line">import (</span><br><span class="line">	&quot;fmt&quot;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">var sli = []int&#123;1, 43, 54, 62, 21, 66, 32, 78, 36, 76, 39&#125;</span><br><span class="line"></span><br><span class="line">func insertSort(sli []int) []int &#123;</span><br><span class="line">	len := len(sli)</span><br><span class="line">	for i := 0; i &lt; len; i++ &#123;</span><br><span class="line">		tmp := sli[i]</span><br><span class="line">		//内层循环控制，比较并插入</span><br><span class="line">		for j := i - 1; j &gt;= 0; j-- &#123;</span><br><span class="line">			if tmp &lt; sli[j] &#123;</span><br><span class="line">				//发现插入的元素要小，交换位置，将后边的元素与前面的元素互换</span><br><span class="line">				sli[j+1], sli[j] = sli[j], tmp</span><br><span class="line">			&#125; else &#123;</span><br><span class="line">				//如果碰到不需要移动的元素，则前面的就不需要再次比较了。</span><br><span class="line">				break</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	return sli</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">	res := insertSort(sli)</span><br><span class="line">	fmt.Println(res)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="字符串类型"><a href="#字符串类型" class="headerlink" title="字符串类型"></a>字符串类型</h2><p>Redis 中最基本的数据类型，他能存储任何形式的字符串，最大容量512M</p>
+<h3 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h3><ul>
+<li><p>赋值与取值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SET key value</span><br><span class="line">GET key</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>递增数字</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">INCR key</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>增加指定的整数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">INCRBY key increment</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>减少指定的整数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">DECR key</span><br><span class="line">DECRBY key decrement</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>增加指定浮点数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">INCRBYFLOAT key increment</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>向尾部追加值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">APPEND key value</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>获取字符串长度</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">STRLEN key</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>同时获得/设置多个键值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">MGET key [key ...]</span><br><span class="line">MSET key value [key value ...]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>位操作</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">GETBIT key offset</span><br><span class="line">SETBIT key offset value </span><br><span class="line">BITCOUNT key [start] [end]</span><br><span class="line">BITOP operation destkey key [key ...]</span><br></pre></td></tr></table></figure>
 
+</li>
+</ul>
+<h3 id="实践"><a href="#实践" class="headerlink" title="实践"></a>实践</h3><p>命名（推荐）：对象类型：对象ID：对象属性（例：user:1:friends）</p>
 <hr>
-<h2 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h2><p>思路分析：选择一个基准元素，通常选择第一个元素或者最后一个元素。通过一趟扫描，将待排序列分成两部分，一部分比基准元素小，一部分大于等于基准元素。此时基准元素在其排好序后的正确位置，然后再用同样的方法递归地排序划分的两部分。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line"></span><br><span class="line">import (</span><br><span class="line">	&quot;fmt&quot;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">var sli = []int&#123;1, 43, 54, 62, 21, 66, 32, 78, 36, 76, 39&#125;</span><br><span class="line"></span><br><span class="line">func quickSort(sli []int) []int &#123;</span><br><span class="line">	//先判断是否需要继续进行</span><br><span class="line">	len := len(sli)</span><br><span class="line">	if len &lt;= 1 &#123;</span><br><span class="line">		return sli</span><br><span class="line">	&#125;</span><br><span class="line">	//选择第一个元素作为基准</span><br><span class="line">	base_num := sli[0]</span><br><span class="line">	//遍历除了标尺外的所有元素，按照大小关系放入左右两个切片内</span><br><span class="line">	//初始化左右两个切片</span><br><span class="line">	left_sli := []int&#123;&#125;  //小于基准的</span><br><span class="line">	right_sli := []int&#123;&#125; //小于基准的</span><br><span class="line">	for i := 1; i &lt; len; i++ &#123;</span><br><span class="line">		if base_num &gt; sli[i] &#123;</span><br><span class="line">			//放入左边切片</span><br><span class="line">			left_sli = append(left_sli, sli[i])</span><br><span class="line">		&#125; else &#123;</span><br><span class="line">			//放入右边切片</span><br><span class="line">			right_sli = append(right_sli, sli[i])</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	//再分别对左边和右边的切片进行相同的排序处理方式递归调用这个函数</span><br><span class="line">	left_sli = quickSort(left_sli)</span><br><span class="line">	right_sli = quickSort(right_sli)</span><br><span class="line"></span><br><span class="line">	//合并</span><br><span class="line">	left_sli = append(left_sli, base_num)</span><br><span class="line">	return append(left_sli, right_sli...)</span><br><span class="line">&#125;</span><br><span class="line">func main() &#123;</span><br><span class="line">	res := quickSort(sli)</span><br><span class="line">	fmt.Println(res)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="散列类型"><a href="#散列类型" class="headerlink" title="散列类型"></a>散列类型</h2><p>Redis采用字典结构以键值对的形式存储数据的，散列类型的键值也是一种字典结构，其存储了字段和字段值得映射，一个散列类型键可以包含2的32次-1个字段</p>
+<h3 id="命令-1"><a href="#命令-1" class="headerlink" title="命令"></a>命令</h3><ul>
+<li><p>赋值与取值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">HSET key field value </span><br><span class="line">HGET key field </span><br><span class="line">HMSET key field value [field value ...]</span><br><span class="line">HMGET key field [field ...]</span><br><span class="line">HGETALL key</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>HSET 不区分插入和更新，修改数据是不必判断字段是否存在</p>
+</li>
+<li><p>判断字段是否存在</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HEXISTS key field</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>当字段不存在时赋值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HSETNX key field value</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>增加数字</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HINCRBY key field increment</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>删除字段</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HDEL key field [field ...]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>只取字段名或字段值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">HKEYS key</span><br><span class="line">HVALS key</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>获得字段数量</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HLEN key</span><br></pre></td></tr></table></figure>
 
+</li>
+</ul>
+<h2 id="列表类型"><a href="#列表类型" class="headerlink" title="列表类型"></a>列表类型</h2><p>可以存储一个有序的字符串列表，常用的操作是向列表良多添加元素，或者获得列表中的某一段</p>
+<h3 id="命令-2"><a href="#命令-2" class="headerlink" title="命令"></a>命令</h3><ul>
+<li><p>向列表两端添加元素</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">LPUSH key value [value ...]</span><br><span class="line">RPUSH key value [value ...]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>从列表两端弹出元素</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">LPOP key </span><br><span class="line">RPOP key</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>获取列表中元素的个数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LLEN key</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>获得列表片段</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LRANGE key start stop</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>删除列表中指定的值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LREM key count value</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>获得/设置指定索引的元素值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">LINDEX key index</span><br><span class="line">LSET key index value</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>只保留列表指定片段</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LTRIM key start end</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>向列表中插入元素</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LINSERT key BEFORE|AETER pivot value</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>将元素从一个列表转移到另一个列表</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">RPOPLPUSH source destination</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
 
         </div>
         
@@ -262,10 +360,10 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-08-07T17:02:00+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-08-08T18:21:42+08:00">
   <a class='notlink'>
     <i class="fas fa-clock" aria-hidden="true"></i>
-    <p>最后更新于 Aug 7, 2019</p>
+    <p>最后更新于 Aug 8, 2019</p>
   </a>
 </div>
 
@@ -274,7 +372,7 @@
         
           
   
-  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/排序/" rel="nofollow"><i class="fas fa-hashtag" aria-hidden="true"></i>&nbsp;<p>排序</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/算法/" rel="nofollow"><i class="fas fa-hashtag" aria-hidden="true"></i>&nbsp;<p>算法</p></a></div>
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/数据库/" rel="nofollow"><i class="fas fa-hashtag" aria-hidden="true"></i>&nbsp;<p>数据库</p></a></div>
 
 
         
@@ -287,7 +385,10 @@
       
         <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer"
           
-          href="http://connect.qq.com/widget/shareqq/index.html?url=http://blog.yuewei.fun/2018/08/03/排序/&title=常用排序 | Ywnline&summary=冒泡排序思路分析：在要排序的切片中，对当前还未排好的序列，从前往后对相邻的两个元素依次进行比较和调整，让较大的数往下沉，较小的往上冒。即，每当两相邻的元素比较后发现它们的排序与排序要求相反时，就将它们互换。"
+          href="http://connect.qq.com/widget/shareqq/index.html?url=http://blog.yuewei.fun/2019/08/08/Redis学习/&title=Redis学习 | Ywnline&summary=准备Redis安装不在赘述、各种环境各种版本网上随便一搜都可以
+启动1redis-server redis.windows.conf
+
+Redis 命令行客户端1redis-cli -h IP -p port"
           
           >
           
@@ -299,7 +400,10 @@
       
         <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer"
           
-          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://blog.yuewei.fun/2018/08/03/排序/&title=常用排序 | Ywnline&summary=冒泡排序思路分析：在要排序的切片中，对当前还未排好的序列，从前往后对相邻的两个元素依次进行比较和调整，让较大的数往下沉，较小的往上冒。即，每当两相邻的元素比较后发现它们的排序与排序要求相反时，就将它们互换。"
+          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://blog.yuewei.fun/2019/08/08/Redis学习/&title=Redis学习 | Ywnline&summary=准备Redis安装不在赘述、各种环境各种版本网上随便一搜都可以
+启动1redis-server redis.windows.conf
+
+Redis 命令行客户端1redis-cli -h IP -p port"
           
           >
           
@@ -311,7 +415,10 @@
       
         <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer"
           
-          href="http://service.weibo.com/share/share.php?url=http://blog.yuewei.fun/2018/08/03/排序/&title=常用排序 | Ywnline&summary=冒泡排序思路分析：在要排序的切片中，对当前还未排好的序列，从前往后对相邻的两个元素依次进行比较和调整，让较大的数往下沉，较小的往上冒。即，每当两相邻的元素比较后发现它们的排序与排序要求相反时，就将它们互换。"
+          href="http://service.weibo.com/share/share.php?url=http://blog.yuewei.fun/2019/08/08/Redis学习/&title=Redis学习 | Ywnline&summary=准备Redis安装不在赘述、各种环境各种版本网上随便一搜都可以
+启动1redis-server redis.windows.conf
+
+Redis 命令行客户端1redis-cli -h IP -p port"
           
           >
           
@@ -339,16 +446,16 @@
                         <span class="art-item-left">
                             <h6><i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;上一页</h6>
                             <h4>
-                                <a href="/2018/08/03/设计模式学习-简单工厂模式/" rel="prev" title="简单工厂模式">
+                                <a href="/2019/08/09/数据结构/" rel="prev" title="数据结构">
                                   
-                                      简单工厂模式
+                                      数据结构
                                   
                                 </a>
                             </h4>
                             
                                 
                                 <h6 class="tags">
-                                    <a class="tag" href="/tags/设计模式/"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>设计模式</a>
+                                    <a class="tag" href="/tags/数据结构/"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>数据结构</a>
                                 </h6>
                             
                         </span>
@@ -359,16 +466,16 @@
                         <span class="art-item-right" aria-hidden="true">
                             <h6>下一页&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i></h6>
                             <h4>
-                                <a href="/2018/08/02/二叉树/" rel="prev" title="二叉树">
+                                <a href="/2018/08/07/策略模式/" rel="prev" title="策略模式">
                                     
-                                        二叉树
+                                        策略模式
                                     
                                 </a>
                             </h4>
                             
                                 
                                 <h6 class="tags">
-                                    <a class="tag" href="/tags/排序/"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>排序</a> <a class="tag" href="/tags/算法/"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>算法</a>
+                                    <a class="tag" href="/tags/设计模式/"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>设计模式</a>
                                 </h6>
                             
                         </span>
@@ -399,7 +506,7 @@
 
   <script>
     window.subData = {
-      title: '常用排序',
+      title: 'Redis学习',
       tools: true
     }
   </script>
@@ -471,7 +578,7 @@
 </header>
 
     <div class='content pure'>
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#冒泡排序"><span class="toc-text">冒泡排序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#选择排序"><span class="toc-text">选择排序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#插入排序"><span class="toc-text">插入排序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#快速排序"><span class="toc-text">快速排序</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#准备"><span class="toc-text">准备</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Redis安装"><span class="toc-text">Redis安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#启动"><span class="toc-text">启动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Redis-命令行客户端"><span class="toc-text">Redis 命令行客户端</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#入门"><span class="toc-text">入门</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#常用命令"><span class="toc-text">常用命令</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#字符串类型"><span class="toc-text">字符串类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#命令"><span class="toc-text">命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实践"><span class="toc-text">实践</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#散列类型"><span class="toc-text">散列类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#命令-1"><span class="toc-text">命令</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#列表类型"><span class="toc-text">列表类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#命令-2"><span class="toc-text">命令</span></a></li></ol></li></ol>
     </div>
   </section>
 

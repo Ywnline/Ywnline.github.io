@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  <title>数据结构 | Ywnline</title>
+  
+  
+  <meta name="description" content="http://blog.yuewei.fun">
+  
+
+  
+
+  <meta name="HandheldFriendly" content="True">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <!-- meta -->
+  
+
+  <!-- link -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.css">
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.6.3/css/all.min.css">
+  
+
+  
+
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.5/css/style.css">
+  
+
+  <script>
+    function setLoadingBarProgress(num) {
+      document.getElementById('loading-bar').style.width=num+"%";
+    }
+  </script>
+
+  
+  
+</head>
+
+<body>
+  
+  
+  <header class="l_header pure">
+  <div id="loading-bar-wrapper">
+    <div id="loading-bar" class="pure"></div>
+  </div>
+
+	<div class='wrapper'>
+		<div class="nav-main container container--flex">
+      <a class="logo flat-box" href='/' >
+        
+          Ywnline
+        
+      </a>
+			<div class='menu navgation'>
+				<ul class='h-list'>
+          
+				</ul>
+			</div>
+
+			
+				<div class="m_search">
+					<form name="searchform" class="form u-search-form">
+						<input type="text" class="input u-search-input" placeholder="搜索" />
+						<i class="icon fas fa-search fa-fw"></i>
+					</form>
+				</div>
+			
+			<ul class='switcher h-list'>
+				
+					<li class='s-search'><a class="fas fa-search fa-fw" href='javascript:void(0)'></a></li>
+				
+				<li class='s-menu'><a class="fas fa-bars fa-fw" href='javascript:void(0)'></a></li>
+			</ul>
+		</div>
+
+		<div class='nav-sub container container--flex'>
+			<a class="logo flat-box"></a>
+			<ul class='switcher h-list'>
+				<li class='s-comment'><a class="flat-btn fas fa-comments fa-fw" href='javascript:void(0)'></a></li>
+        
+          <li class='s-toc'><a class="flat-btn fas fa-list fa-fw" href='javascript:void(0)'></a></li>
+        
+			</ul>
+		</div>
+	</div>
+</header>
+	<aside class="menu-phone">
+    <header>
+		<nav class="menu navgation">
+      <ul>
+        
+          
+            <li>
+							<a class="nav flat-box" href="/"
+                
+                
+                id="home">
+								<i class='fas fa-clock fa-fw'></i>&nbsp;近期文章
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/archives/"
+                
+                  rel="nofollow"
+                
+                
+                id="archives">
+								<i class='fas fa-archive fa-fw'></i>&nbsp;文章归档
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/projects/"
+                
+                
+                id="projects">
+								<i class='fas fa-code-branch fa-fw'></i>&nbsp;开源项目
+							</a>
+            </li>
+          
+       
+      </ul>
+		</nav>
+    </header>
+	</aside>
+<script>setLoadingBarProgress(40);</script>
+
+
+
+  <div class="l_body nocover">
+    <div class='body-wrapper'>
+      <div class='l_main'>
+  
+
+  
+    <article id="post" class="post white-box article-type-post" itemscope itemprop="blogPost">
+      
+
+
+  <section class='meta'>
+    
+    
+    <div class="meta" id="header-meta">
+      
+        
+  
+    <h1 class="title">
+      <a href="/2019/08/09/数据结构/">
+        数据结构
+      </a>
+    </h1>
+  
+
+
+      
+      <div class='new-meta-box'>
+        
+          
+        
+          
+            
+  <div class='new-meta-item author'>
+    <a href="http://blog.yuewei.fun" rel="nofollow">
+      
+        <i class="fas fa-user" aria-hidden="true"></i>
+      
+      <p>Ywnline</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2019-08-09</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+
+          
+        
+          
+            
+  
+    <div class="new-meta-item browse busuanzi">
+      <a class='notlink'>
+        <i class="fas fa-eye" aria-hidden="true"></i>
+        <p>
+          <span id="busuanzi_value_page_pv">
+            <i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i>
+          </span>
+        </p>
+      </a>
+    </div>
+  
+
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+      <section class="article typo">
+        <div class="article-entry" itemprop="articleBody">
+          <h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p>数据结构就是研究数据的逻辑结构和物理结构以及它们之间相互关系，并对这种结构定义相应的运算，而且确保经过这些运算后所得到的新结构仍然是原来的结构类型。</p>
+<a id="more"></a>
+
+<ul>
+<li>数据：所有能被输入到计算机中，且能被计算机处理的符号的集合。是计算机操作的对象的总称。</li>
+<li>数据元素：数据（集合）中的一个“个体”，数据及结构中讨论的基本单位</li>
+<li>数据项：数据的不可分割的最小单位。一个数据元素可由若干个数据项组成。</li>
+<li>数据类型：在一种程序设计语言中，变量所具有的数据种类。整型、字符型等等</li>
+<li>逻辑结构：数据之间的相互关系。<ul>
+<li>集合 结构中的数据元素除了同属于一种类型外，别无其它关系。</li>
+<li>线性结构 数据元素之间一对一的关系</li>
+<li>树形结构 数据元素之间一对多的关系</li>
+<li>图状结构或网状结构 结构中的数据元素之间存在多对多的关系</li>
+</ul>
+</li>
+<li>物理结构/存储结构：数据在计算机中的表示。物理结构是描述数据具体在内存中的存储（如：顺序结构、链式结构、索引结构、哈希结构）等</li>
+<li>在数据结构中,从逻辑上可以将其分为线性结构和非线性结构</li>
+<li>数据结构的基本操作的设置的最重要的准则<ul>
+<li>实现应用程序与存储结构的独立。实现应用程序是“逻辑结构”</li>
+<li>存储的是“物理结构”。逻辑结构主要是对该结构操作的设定物理结构是描述数据具体在内存中的</li>
+<li>顺序结构、链式结构、索引结构、希哈结构</li>
+</ul>
+</li>
+<li>顺序存储结构中，线性表的逻辑顺序和物理顺序总是一致的。但在链式存储结构中，线性表的逻辑顺序和物理顺序一般是不同的。</li>
+<li>算法五个特性： 有穷性、确定性、可行性、输入、输出</li>
+<li>算法设计要求：正确性、可读性、健壮性、高效率与低存储量需求。</li>
+<li>算法的描述有伪程序、流程图、N-S结构图等。E-R图是实体联系模型，不是程序的描述方式。</li>
+<li>设计算法在执行时间时需要考虑：算法选用的规模、问题的规模</li>
+<li>时间复杂度：算法的执行时间与原操作执行次数之和成正比。时间复杂度有小到大：O(1)、O(logn)、O(n)、O(nlogn)、O(n2)、O(n3)。幂次时间复杂度有小到大O(2n)、O(n!)、O(nn)</li>
+<li>空间复杂度：若输入数据所占空间只取决于问题本身，和算法无关，则只需要分析除输入和程序之外的辅助变量所占额外空间。</li>
+</ul>
+<hr>
+<h2 id="线性表"><a href="#线性表" class="headerlink" title="线性表"></a>线性表</h2><ul>
+<li>对于同一个线性表，其每一个数据元素的值虽然不同，但必须具有相同的数据类型</li>
+<li>线性表是一种典型的线性结构。头结点无前驱有一个后继，尾节点无后继有一个前驱。链表只能顺序查找，定位一个元素的时间为O(N)，删除一个元素的时间为O(1)</li>
+</ul>
+<h3 id="线性表的顺序存储结构"><a href="#线性表的顺序存储结构" class="headerlink" title="线性表的顺序存储结构"></a>线性表的顺序存储结构</h3><p>把线性表的结点按逻辑顺序依次存放在一组地址连续的存储单元里。用这种方法存储的线性表简称顺序表。是一种随机存取的存储结构。顺序存储指内存地址是一块的，随机存取指访问时可以按下标随机访问，存储和存取是不一样的。如果是存储，则是指按顺序的，如果是存取，则是可以随机的，可以利用元素下标进行。数组比线性表速度更快的是：原地逆序、返回中间节点、选择随机节点。 </p>
+<ul>
+<li>便于线性表的构造和任意元素的访问</li>
+<li>插入：插入新结点，之后结点后移。平均时间复杂度:O(n)</li>
+<li>删除：删除节点，之后结点前移。平均时间复杂度:O(n)</li>
+</ul>
+<h3 id="线性链表"><a href="#线性链表" class="headerlink" title="线性链表"></a>线性链表</h3><ul>
+<li>单链表中每个结点的存储地址是存放在其前趋结点next域中，而开始结点无前趋，故应设头指针head指向开始结点。同时，由于最后一个结点无后继，故结点的指针域为空，即NULL。头插法建表(逆序)、尾插法建表(顺序)。增加头结点的目的是算法实现上的方便，但增大了内存开销。 <ul>
+<li>查找：只能从链表的头指针出发，顺链域next逐个结点往下搜索，直到搜索到第i个结点为止。因此，链表不是随机存取结构。</li>
+<li>插入：先找到表的第i-1的存储位置，然后插入。新结点先连后继，再连前驱。</li>
+<li>删除：首先找到ai-1的存储位置p。然后令p–&gt;next指向ai的直接后继结点，即把ai从链上摘下。最后释放结点ai的空间.r=p-&gt;next;p-&gt;next=r-&gt;next;delete r。<br>判断一个单向链表中是否存在环的最佳方法是快慢指针。</li>
+</ul>
+</li>
+<li>静态链表：用一维数组来实现线性链表，这种用一维数组表示的线性链表，称为静态链表。静态：体现在表的容量是一定的。（数组的大小）；链表：插入与删除同前面所述的动态链表方法相同。静态链表中指针表示的是下一元素在数组中的位置。<br>静态链表是用数组实现的，是顺序的存储结构，在物理地址上是连续的，而且需要预先分配大小。动态链表是用申请内存函数（C是malloc,C++是new）动态申请内存的，所以在链表的长度上没有限制。动态链表因为是动态申请内存的，所以每个节点的物理地址不连续，要通过指针来顺序访问。静态链表在插入、删除时也是通过修改指针域来实现的，与动态链表没有什么分别</li>
+<li>循环链表：是一种头尾相接的链表。其特点是无须增加存储量，仅对表的链接方式稍作改变，即可使得表处理更加方便灵活。<br>在单链表中，将终端结点的指针域NULL改为指向表头结点的或开始结点，就得到了单链形式的循环链表，并简单称为单循环链表。由于循环链表中没有NULL指针，故涉及遍历操作时，其终止条件就不再像非循环链表那样判断p或p—&gt;next是否为空，而是判断它们是否等于某一指定指针，如头指针或尾指针等。</li>
+<li>双向链表:在单链表的每个结点里再增加一个指向其直接前趋的指针域prior。这样就形成的链表中有两个方向不同的链。双链表一般由头指针唯一确定的，将头结点和尾结点链接起来构成循环链表，并称之为双向链表。设指针p指向某一结点，则双向链表结构的对称性可用下式描述：p—&gt;prior—&gt;next=p=p—&gt;next—&gt;prior。从两个方向搜索双链表，比从一个方向搜索双链表的方差要小。 <ul>
+<li>插入：先搞定插入节点的前驱和后继，再搞定后结点的前驱，最后搞定前结点的后继。</li>
+<li>在有序双向链表中定位删除一个元素的平均时间复杂度为O(n)</li>
+<li>可以直接删除当前指针所指向的节点。而不需要像单向链表中，删除一个元素必须找到其前驱。因此在插入数据时，单向链表和双向链表操作复杂度相同，而删除数据时，双向链表的性能优于单向链表</li>
+</ul>
+</li>
+</ul>
+<h3 id="线性表的抽象数据类型描述"><a href="#线性表的抽象数据类型描述" class="headerlink" title="线性表的抽象数据类型描述"></a>线性表的抽象数据类型描述</h3><ul>
+<li>线性表的置空操作clear()：将一个已经存在的线性表置为空表。</li>
+<li>线性表判空操作isEmpty()：判断线性表是否为空，若为空，则返回true；否则，返回为false。</li>
+<li>求线性表的长度操作length()：求线性表中的数据元素的个数并返回其值。</li>
+<li>取元素操作get(i)：读取并返回线性表中的第i个数据元素的值。其中i的取值范围为0≤i≤length()-1。</li>
+<li>插入操作insert(i,x)：在线性表的第i个数据元素之前插入一个值为x的数据元素。其中i的取值范围为0≤i≤length()。当i=0时，在表头插入x；当i=length()时，在表尾插入x。</li>
+<li>删除操作remove(i)：删除并返回线性表中第i个数据元素。其中i的取值范围为0≤i≤length()-1。</li>
+<li>查找操作indexOf(x)：返回线性表中首次出现的指定的数据元素的位序号，若线性表中不包含此数据元素，则返回-1。</li>
+</ul>
+<p>线性表的抽线数据类型用Golang接口描述如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line">import (</span><br><span class="line">    &quot;errors&quot;</span><br><span class="line">    &quot;fmt&quot;</span><br><span class="line">)</span><br><span class="line">const MAX_LENGTH = 20 // 常量定义线性表最大长度</span><br><span class="line">//　定义一个线性表顺序存储结构体</span><br><span class="line">type LineList struct &#123;</span><br><span class="line">    MaxLength  int</span><br><span class="line">    Length int</span><br><span class="line">    LineListContent []interface&#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line">//　初始化一个线性表</span><br><span class="line">func InitLineList () *LineList&#123;</span><br><span class="line">    return &amp;LineList&#123;MaxLength:MAX_LENGTH, LineListContent:make([]interface&#123;&#125;,0,MAX_LENGTH)&#125;</span><br><span class="line">&#125;</span><br><span class="line">//　判断当前线性表是否为空</span><br><span class="line">func (l LineList) IsEmpty() bool &#123;</span><br><span class="line">    if l.Length == 0&#123;</span><br><span class="line">        return true</span><br><span class="line">    &#125;</span><br><span class="line">    return false</span><br><span class="line">&#125;</span><br><span class="line">// 判断当前线性表是否满了</span><br><span class="line">func (l LineList) IsFull() bool&#123;</span><br><span class="line">    if l.Length == l.MaxLength&#123;</span><br><span class="line">        return true</span><br><span class="line">    &#125;</span><br><span class="line">    return false</span><br><span class="line">&#125;</span><br><span class="line">// 判断索引是否越界，越界返回ｔｒｕｅ</span><br><span class="line">func (l LineList) indexOver(i int) bool&#123;</span><br><span class="line">    if i &lt; 1 || i &gt;l.Length&#123;</span><br><span class="line">        return true</span><br><span class="line">    &#125;</span><br><span class="line">    return false</span><br><span class="line">&#125;</span><br><span class="line">// 获取一个ｎｏｄｅ数据</span><br><span class="line">func (l LineList) getData(i int )(interface&#123;&#125;,error)&#123;</span><br><span class="line">    if ok:= l.indexOver(i); ok&#123;</span><br><span class="line">        return &quot;&quot;,errors.New(&quot;查找的索引不在线性表范围内&quot;)</span><br><span class="line">    &#125;</span><br><span class="line">    return l.LineListContent[i+1],nil</span><br><span class="line">&#125;</span><br><span class="line">// 任意位置删除一个ｎｏｄｅ数据</span><br><span class="line">func (l *LineList) Delete(i int)(interface&#123;&#125;,error)&#123;</span><br><span class="line">    if ok:= l.indexOver(i); ok&#123;</span><br><span class="line">        return &quot;&quot;,errors.New(&quot;删除的索引不在线性表范围内&quot;)</span><br><span class="line">    &#125;</span><br><span class="line">    if ok:=l.IsEmpty();ok&#123;</span><br><span class="line">        return  &quot;&quot;,errors.New(&quot;空表没有可删除的数据&quot;)</span><br><span class="line">    &#125;</span><br><span class="line">    deleteData := l.LineListContent[i-1]</span><br><span class="line">    for j:=i-1; j&lt;l.Length-1;j++&#123;</span><br><span class="line">        l.LineListContent[j] = l.LineListContent[j+1]</span><br><span class="line">        fmt.Println(j,&quot;个&quot;,l.LineListContent[j])</span><br><span class="line">    &#125;</span><br><span class="line">    l.LineListContent = l.LineListContent[:l.Length-1] // 留了最后一个在，需要切除</span><br><span class="line">    l.Length --</span><br><span class="line">    return deleteData,nil</span><br><span class="line">&#125;</span><br><span class="line">//末尾　ｐｏｐ　一个数据</span><br><span class="line">func (l *LineList) Pop()(interface&#123;&#125;,error)&#123;</span><br><span class="line">    if ok:= l.IsEmpty();ok&#123;</span><br><span class="line">        return &quot;&quot;,errors.New(&quot;空表，无法删除任何数据&quot;)</span><br><span class="line">    &#125;</span><br><span class="line">    temp := l.LineListContent[l.Length-1]</span><br><span class="line">    l.LineListContent = l.LineListContent[:l.Length-1]</span><br><span class="line">    l.Length --</span><br><span class="line">    return temp,nil</span><br><span class="line">&#125;</span><br><span class="line">// 末尾　Append 一个数据</span><br><span class="line">func (l *LineList) Append(data interface&#123;&#125;)(bool,error)&#123;</span><br><span class="line">    if ok:= l.IsFull(); ok&#123;</span><br><span class="line">        return false,errors.New(&quot;线性表已满，无法添加数据&quot;)</span><br><span class="line">    &#125;</span><br><span class="line">    l.LineListContent = append(l.LineListContent, data)</span><br><span class="line">    l.Length ++</span><br><span class="line">    return true,nil</span><br><span class="line">&#125;</span><br><span class="line">// 任意位置　ｉｎｓｅｒｔ　一个数据</span><br><span class="line">func (l *LineList) Insert(i int,data interface&#123;&#125;)(bool,error)&#123;</span><br><span class="line">    if ok:= l.IsFull(); ok&#123;</span><br><span class="line">        return false,errors.New(&quot;线性表已满，无法添加数据&quot;)</span><br><span class="line">    &#125;</span><br><span class="line">    if ok:= l.indexOver(i);ok&#123;</span><br><span class="line">        return false,errors.New(&quot;插入点越界&quot;)</span><br><span class="line">    &#125;</span><br><span class="line">    l.Append(&quot;&quot;) // 增加一个空数据，防止下面访问越界</span><br><span class="line">    for j:=l.Length-1;j&gt;i-1;j--&#123;</span><br><span class="line">        //从后往前赋值，新增一个空ｎｏｄｅ，然后把数据一个个后移，直到插入的位置</span><br><span class="line">        //知道线性表从１开始，而切片是从０开始的</span><br><span class="line">        l.LineListContent[j] = l.LineListContent[j-1]</span><br><span class="line">    &#125;</span><br><span class="line">    l.LineListContent[i-1] = data</span><br><span class="line">    return true,nil</span><br><span class="line">&#125;</span><br><span class="line">func main()&#123;</span><br><span class="line">    ls := InitLineList()</span><br><span class="line">    ls.Append(11)</span><br><span class="line">    fmt.Println(ls.LineListContent) //[11]</span><br><span class="line">    fmt.Println(ls.Length) // 1</span><br><span class="line">    ls.Insert(3,&quot;gac&quot;)</span><br><span class="line">    ls.Insert(1,&quot;gac&quot;)</span><br><span class="line">    fmt.Println(ls.LineListContent) //[gac 11]</span><br><span class="line">    fmt.Println(ls.Length)  //2</span><br><span class="line">    ls.Delete(2)</span><br><span class="line">    fmt.Println(ls.LineListContent) //[gac]</span><br><span class="line">    fmt.Println(ls.Length)     // 1</span><br><span class="line">    cd,err0 := ls.Pop()</span><br><span class="line">    if err0==nil&#123;</span><br><span class="line">        fmt.Println(cd)      // gac</span><br><span class="line">    &#125;</span><br><span class="line">    fmt.Println(ls.LineListContent) //[]</span><br><span class="line">    fmt.Println(ls.Length)    // 0</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+        </div>
+        
+          
+
+
+  <section class='meta' id="footer-meta">
+    <hr>
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-08-09T10:19:29+08:00">
+  <a class='notlink'>
+    <i class="fas fa-clock" aria-hidden="true"></i>
+    <p>最后更新于 Aug 9, 2019</p>
+  </a>
+</div>
+
+        
+      
+        
+          
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/数据结构/" rel="nofollow"><i class="fas fa-hashtag" aria-hidden="true"></i>&nbsp;<p>数据结构</p></a></div>
+
+
+        
+      
+        
+          
+  <div class="new-meta-item share -mob-share-list">
+  <div class="-mob-share-list share-body">
+    
+      
+        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer"
+          
+          href="http://connect.qq.com/widget/shareqq/index.html?url=http://blog.yuewei.fun/2019/08/09/数据结构/&title=数据结构 | Ywnline&summary=概念数据结构就是研究数据的逻辑结构和物理结构以及它们之间相互关系，并对这种结构定义相应的运算，而且确保经过这些运算后所得到的新结构仍然是原来的结构类型。"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/qq.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer"
+          
+          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://blog.yuewei.fun/2019/08/09/数据结构/&title=数据结构 | Ywnline&summary=概念数据结构就是研究数据的逻辑结构和物理结构以及它们之间相互关系，并对这种结构定义相应的运算，而且确保经过这些运算后所得到的新结构仍然是原来的结构类型。"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/qzone.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer"
+          
+          href="http://service.weibo.com/share/share.php?url=http://blog.yuewei.fun/2019/08/09/数据结构/&title=数据结构 | Ywnline&summary=概念数据结构就是研究数据的逻辑结构和物理结构以及它们之间相互关系，并对这种结构定义相应的运算，而且确保经过这些运算后所得到的新结构仍然是原来的结构类型。"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/weibo.png">
+          
+        </a>
+      
+    
+  </div>
+</div>
+
+
+
+        
+      
+    </div>
+  </section>
+
+
+        
+        
+            <div class="prev-next">
+                
+                
+                    <section class="next">
+                        <span class="art-item-right" aria-hidden="true">
+                            <h6>下一页&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i></h6>
+                            <h4>
+                                <a href="/2019/08/08/Redis学习/" rel="prev" title="Redis学习">
+                                    
+                                        Redis学习
+                                    
+                                </a>
+                            </h4>
+                            
+                                
+                                <h6 class="tags">
+                                    <a class="tag" href="/tags/数据库/"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>数据库</a>
+                                </h6>
+                            
+                        </span>
+                    </section>
+                
+            </div>
+        
+      </section>
+    </article>
+  
+
+  
+    <!-- 显示推荐文章和评论 -->
+
+
+
+  
+
+
+  
+
+
+
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+
+
+  <script>
+    window.subData = {
+      title: '数据结构',
+      tools: true
+    }
+  </script>
+
+
+</div>
+<aside class='l_side'>
+  
+    
+    
+      
+        
+          
+          
+            <section class='widget author'>
+  <div class='content pure'>
+    
+      <div class='avatar'>
+        <img class='avatar' src='https://thumbnail0.baidupcs.com/thumbnail/7104975ac72cc1976658a90137ee460c?fid=2141723139-250528-915990999516969&time=1565172000&rt=sh&sign=FDTAER-DCb740ccc5511e5e8fedcff06b081203-EI3s3eOoN2DID3SjHRodes5RZe0%3D&expires=8h&chkv=0&chkbd=0&chkpc=&dp-logid=5073800775473289719&dp-callid=0&size=c710_u400&quality=100&vuk=-&ft=video'/>
+      </div>
+    
+    
+    
+      <div class="social-wrapper">
+        
+          
+            <a href="mailto:yw0601@126.com"
+              class="social fas fa-envelope flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="https://github.com/Ywnline"
+              class="social fab fa-github flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="https://music.163.com"
+              class="social fas fa-headphones-alt flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+      </div>
+    
+  </div>
+</section>
+
+          
+        
+      
+        
+          
+          
+            
+  <section class='widget toc-wrapper'>
+    
+<header class='pure'>
+  <div><i class="fas fa-list fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;本文目录</div>
+  
+    <div class='wrapper'><a class="s-toc rightBtn" rel="external nofollow noopener noreferrer" href="javascript:void(0)"><i class="fas fa-thumbtack fa-fw"></i></a></div>
+  
+</header>
+
+    <div class='content pure'>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#概念"><span class="toc-text">概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#线性表"><span class="toc-text">线性表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#线性表的顺序存储结构"><span class="toc-text">线性表的顺序存储结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#线性链表"><span class="toc-text">线性链表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#线性表的抽象数据类型描述"><span class="toc-text">线性表的抽象数据类型描述</span></a></li></ol></li></ol>
+    </div>
+  </section>
+
+
+          
+        
+      
+        
+          
+          
+            <section class='widget grid'>
+  
+<header class='pure'>
+  <div><i class="fas fa-map-signs fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;站内导航</div>
+  
+</header>
+
+  <div class='content pure'>
+    <ul class="grid navgation">
+      
+        <li><a class="flat-box" title="/" href="/"
+          
+          
+          id="home">
+          
+            <i class="fas fa-clock fa-fw" aria-hidden="true"></i>
+          
+          近期文章
+        </a></li>
+      
+        <li><a class="flat-box" title="/archives/" href="/archives/"
+          
+            rel="nofollow"
+          
+          
+          id="archives">
+          
+            <i class="fas fa-archive fa-fw" aria-hidden="true"></i>
+          
+          文章归档
+        </a></li>
+      
+        <li><a class="flat-box" title="/projects/" href="/projects/"
+          
+          
+          id="projects">
+          
+            <i class="fas fa-code-branch fa-fw" aria-hidden="true"></i>
+          
+          开源项目
+        </a></li>
+      
+    </ul>
+  </div>
+</section>
+
+          
+        
+      
+        
+          
+          
+            
+  <section class='widget category'>
+    
+<header class='pure'>
+  <div><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;文章分类</div>
+  
+    <a class="rightBtn"
+    
+      rel="nofollow"
+    
+    
+    href="/categories/"
+    title="categories/">
+    <i class="fas fa-expand-arrows-alt fa-fw"></i></a>
+  
+</header>
+
+    <div class='content pure'>
+      <ul class="entry">
+        
+          <li><a class="flat-box" title="/categories/操作系统/" href="/categories/操作系统/"><div class='name'>操作系统</div><div class='badge'>(2)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/数据库/" href="/categories/数据库/"><div class='name'>数据库</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/算法排序/" href="/categories/算法排序/"><div class='name'>算法排序</div><div class='badge'>(5)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/计算应网络/" href="/categories/计算应网络/"><div class='name'>计算应网络</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/设计模式/" href="/categories/设计模式/"><div class='name'>设计模式</div><div class='badge'>(2)</div></a></li>
+        
+      </ul>
+    </div>
+  </section>
+
+
+          
+        
+      
+        
+          
+          
+            
+  <section class='widget tagcloud'>
+    
+<header class='pure'>
+  <div><i class="fas fa-fire fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;热门标签</div>
+  
+    <a class="rightBtn"
+    
+      rel="nofollow"
+    
+    
+    href="/tags/"
+    title="tags/">
+    <i class="fas fa-expand-arrows-alt fa-fw"></i></a>
+  
+</header>
+
+    <div class='content pure'>
+      <a href="/tags/排序/" style="font-size: 20.67px; color: #6c6c6c">排序</a> <a href="/tags/操作系统/" style="font-size: 17.33px; color: #828282">操作系统</a> <a href="/tags/数据库/" style="font-size: 14px; color: #999">数据库</a> <a href="/tags/数据结构/" style="font-size: 14px; color: #999">数据结构</a> <a href="/tags/服务器/" style="font-size: 17.33px; color: #828282">服务器</a> <a href="/tags/算法/" style="font-size: 24px; color: #555">算法</a> <a href="/tags/网络/" style="font-size: 14px; color: #999">网络</a> <a href="/tags/设计原则/" style="font-size: 14px; color: #999">设计原则</a> <a href="/tags/设计模式/" style="font-size: 20.67px; color: #6c6c6c">设计模式</a>
+    </div>
+  </section>
+
+
+          
+        
+      
+    
+
+  
+</aside>
+
+<footer id="footer" class="clearfix">
+  
+  
+    <div class="social-wrapper">
+      
+        
+          <a href="mailto:yw0601@126.com"
+            class="social fas fa-envelope flat-btn"
+            target="_blank"
+            rel="external nofollow noopener noreferrer">
+          </a>
+        
+      
+        
+          <a href="https://github.com/Ywnline"
+            class="social fab fa-github flat-btn"
+            target="_blank"
+            rel="external nofollow noopener noreferrer">
+          </a>
+        
+      
+        
+          <a href="https://music.163.com"
+            class="social fas fa-headphones-alt flat-btn"
+            target="_blank"
+            rel="external nofollow noopener noreferrer">
+          </a>
+        
+      
+    </div>
+  
+  <br>
+  <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
+</div>
+  <div>
+    本站使用
+    <a href="https://xaoxuu.com/wiki/material-x/" target="_blank" class="codename">Material X</a>
+    作为主题
+    
+      ，
+      总访问量为
+      <span id="busuanzi_value_site_pv"><i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span>
+      次
+    
+    。
+  </div>
+</footer>
+<script>setLoadingBarProgress(80);</script>
+
+
+      <script>setLoadingBarProgress(60);</script>
+    </div>
+    <a class="s-top fas fa-arrow-up fa-fw" href='javascript:void(0)'></a>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+
+  <script>
+    var GOOGLE_CUSTOM_SEARCH_API_KEY = "";
+    var GOOGLE_CUSTOM_SEARCH_ENGINE_ID = "";
+    var ALGOLIA_API_KEY = "";
+    var ALGOLIA_APP_ID = "";
+    var ALGOLIA_INDEX_NAME = "";
+    var AZURE_SERVICE_NAME = "";
+    var AZURE_INDEX_NAME = "";
+    var AZURE_QUERY_KEY = "";
+    var BAIDU_API_ID = "";
+    var SEARCH_SERVICE = "hexo" || "hexo";
+    var ROOT = "/"||"/";
+    if(!ROOT.endsWith('/'))ROOT += '/';
+  </script>
+
+<script src="//instant.page/1.2.2" type="module" integrity="sha384-2xV8M5griQmzyiY3CDqh1dn4z3llDVqZDqzjzcY+jCBCk/a5fXJmuZ/40JJAPeoU"></script>
+
+
+  <script async src="https://cdn.jsdelivr.net/npm/scrollreveal@4.0.5/dist/scrollreveal.min.js"></script>
+  <script type="text/javascript">
+    $(function() {
+      const $reveal = $('.reveal');
+      if ($reveal.length === 0) return;
+      const sr = ScrollReveal({ distance: 0 });
+      sr.reveal('.reveal');
+    });
+  </script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.js"></script>
+  <script type="text/javascript">
+    $(function() {
+      Waves.attach('.flat-btn', ['waves-button']);
+      Waves.attach('.float-btn', ['waves-button', 'waves-float']);
+      Waves.attach('.float-btn-light', ['waves-button', 'waves-float', 'waves-light']);
+      Waves.attach('.flat-box', ['waves-block']);
+      Waves.attach('.float-box', ['waves-block', 'waves-float']);
+      Waves.attach('.waves-image');
+      Waves.init();
+    });
+  </script>
+
+
+  <script async src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-busuanzi@2.3/js/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.5/js/app.js"></script>
+
+
+  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.5/js/search.js"></script>
+
+
+
+
+<!-- 复制 -->
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  let COPY_SUCCESS = "复制成功";
+  let COPY_FAILURE = "复制失败";
+  /*页面载入完成后，创建复制按钮*/
+  !function (e, t, a) {
+    /* code */
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '  <i class="fa fa-copy"></i><span>复制</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+
+      clipboard.on('success', function(e) {
+        //您可以加入成功提示
+        console.info('Action:', e.action);
+        console.info('Text:', e.text);
+        console.info('Trigger:', e.trigger);
+        success_prompt(COPY_SUCCESS);
+        e.clearSelection();
+      });
+      clipboard.on('error', function(e) {
+        //您可以加入失败提示
+        console.error('Action:', e.action);
+        console.error('Trigger:', e.trigger);
+        fail_prompt(COPY_FAILURE);
+      });
+    }
+    initCopyCode();
+
+  }(window, document);
+
+  /**
+   * 弹出式提示框，默认1.5秒自动消失
+   * @param message 提示信息
+   * @param style 提示样式，有alert-success、alert-danger、alert-warning、alert-info
+   * @param time 消失时间
+   */
+  var prompt = function (message, style, time)
+  {
+      style = (style === undefined) ? 'alert-success' : style;
+      time = (time === undefined) ? 1500 : time*1000;
+      $('<div>')
+          .appendTo('body')
+          .addClass('alert ' + style)
+          .html(message)
+          .show()
+          .delay(time)
+          .fadeOut();
+  };
+
+  // 成功提示
+  var success_prompt = function(message, time)
+  {
+      prompt(message, 'alert-success', time);
+  };
+
+  // 失败提示
+  var fail_prompt = function(message, time)
+  {
+      prompt(message, 'alert-danger', time);
+  };
+
+  // 提醒
+  var warning_prompt = function(message, time)
+  {
+      prompt(message, 'alert-warning', time);
+  };
+
+  // 信息提示
+  var info_prompt = function(message, time)
+  {
+      prompt(message, 'alert-info', time);
+  };
+
+</script>
+
+
+<!-- fancybox -->
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script>
+  let LAZY_LOAD_IMAGE = "";
+  $(".article-entry").find("fancybox").find("img").each(function () {
+      var element = document.createElement("a");
+      $(element).attr("data-fancybox", "gallery");
+      $(element).attr("href", $(this).attr("src"));
+      /* 图片采用懒加载处理时,
+       * 一般图片标签内会有个属性名来存放图片的真实地址，比如 data-original,
+       * 那么此处将原本的属性名src替换为对应属性名data-original,
+       * 修改如下
+       */
+       if (LAZY_LOAD_IMAGE) {
+         $(element).attr("href", $(this).attr("data-original"));
+       }
+      $(this).wrap(element);
+  });
+</script>
+
+
+
+
+
+  <script>setLoadingBarProgress(100);</script>
+</body>
+</html>
