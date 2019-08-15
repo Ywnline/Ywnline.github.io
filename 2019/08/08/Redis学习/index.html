@@ -66,7 +66,7 @@
 			
 				<div class="m_search">
 					<form name="searchform" class="form u-search-form">
-						<input type="text" class="input u-search-input" placeholder="搜索" />
+						<input type="text" class="input u-search-input" placeholder="搜尋" />
 						<i class="icon fas fa-search fa-fw"></i>
 					</form>
 				</div>
@@ -471,7 +471,34 @@
 </ul>
 <h4 id="使用示例-3"><a href="#使用示例-3" class="headerlink" title="使用示例"></a>使用示例</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">redis 127.0.0.1:6379&gt; zadd dbs 100 redis</span><br><span class="line">(integer) 1</span><br><span class="line">redis 127.0.0.1:6379&gt; zadd dbs 98 memcached</span><br><span class="line">(integer) 1</span><br><span class="line">redis 127.0.0.1:6379&gt; zadd dbs 99 mongodb</span><br><span class="line">(integer) 1</span><br><span class="line">redis 127.0.0.1:6379&gt; zadd dbs 99 leveldb</span><br><span class="line">(integer) 1</span><br><span class="line">redis 127.0.0.1:6379&gt; zcard dbs</span><br><span class="line">(integer) 4</span><br><span class="line">redis 127.0.0.1:6379&gt; zcount dbs 10 99</span><br><span class="line">(integer) 3</span><br><span class="line">redis 127.0.0.1:6379&gt; zrank dbs leveldb</span><br><span class="line">(integer) 1</span><br><span class="line">redis 127.0.0.1:6379&gt; zrank dbs other</span><br><span class="line">(nil)</span><br><span class="line">redis 127.0.0.1:6379&gt; zrangebyscore dbs 98 100</span><br><span class="line">1) &quot;memcached&quot;</span><br><span class="line">2) &quot;leveldb&quot;</span><br><span class="line">3) &quot;mongodb&quot;</span><br><span class="line">4) &quot;redis&quot;</span><br><span class="line">Reference</span><br></pre></td></tr></table></figure>
 
+<h2 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h2><h3 id="概述："><a href="#概述：" class="headerlink" title="概述："></a>概述：</h3><p>Redis中的事务十一组命令的集合    将属于一个事物的命令先送给Redis，然后再让Redis一次执行这些命令</p>
+<h4 id="使用示例-4"><a href="#使用示例-4" class="headerlink" title="使用示例"></a>使用示例</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6789&gt; MULTI</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6789&gt; SADD &quot;user:1:following&quot; 2</span><br><span class="line">QUEUED</span><br><span class="line">127.0.0.1:6789&gt; SADD &quot;user:2:followers&quot; 1</span><br><span class="line">QUEUED</span><br><span class="line">127.0.0.1:6789&gt; EXEC</span><br><span class="line">1) (integer) 0</span><br><span class="line">2) (integer) 0</span><br></pre></td></tr></table></figure>
 
+<h3 id="错误处理"><a href="#错误处理" class="headerlink" title="错误处理"></a>错误处理</h3><ul>
+<li>语法错误：不存在或参数不对<ul>
+<li>执行EXEC命令后Redis就直接返回错误，正确的命令也不会执行</li>
+</ul>
+</li>
+<li>运行错误:使用不同类型命令<ul>
+<li>错误命令之前命令不执行 之后命令会执行</li>
+<li>Redis 无回滚</li>
+</ul>
+</li>
+</ul>
+<h3 id="watch-命令介绍"><a href="#watch-命令介绍" class="headerlink" title="watch 命令介绍"></a>watch 命令介绍</h3><h4 id="概述：watch-命令可以监控一个或多个键，一点其中有一个键被修改（或删除），之后的事务就不会执行。监控一直持续到EXEC命令（事务中的命令是在EXEC之后才执行的，所以在MULTI命令后可以修改WATCH监控的键值）"><a href="#概述：watch-命令可以监控一个或多个键，一点其中有一个键被修改（或删除），之后的事务就不会执行。监控一直持续到EXEC命令（事务中的命令是在EXEC之后才执行的，所以在MULTI命令后可以修改WATCH监控的键值）" class="headerlink" title="概述：watch 命令可以监控一个或多个键，一点其中有一个键被修改（或删除），之后的事务就不会执行。监控一直持续到EXEC命令（事务中的命令是在EXEC之后才执行的，所以在MULTI命令后可以修改WATCH监控的键值）"></a>概述：watch 命令可以监控一个或多个键，一点其中有一个键被修改（或删除），之后的事务就不会执行。监控一直持续到EXEC命令（事务中的命令是在EXEC之后才执行的，所以在MULTI命令后可以修改WATCH监控的键值）</h4><h4 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6789&gt; SET demo 1</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6789&gt; watch demo</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6789&gt; set demo 2</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6789&gt; MULTI</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6789&gt; set demo 3</span><br><span class="line">QUEUED</span><br><span class="line">127.0.0.1:6789&gt; EXEC -</span><br><span class="line">(nil)</span><br><span class="line">127.0.0.1:6789&gt; get key</span><br><span class="line">&quot;2&quot;</span><br></pre></td></tr></table></figure>
+
+<h2 id="过期时间"><a href="#过期时间" class="headerlink" title="过期时间"></a>过期时间</h2><ul>
+<li><p>设置过期时间</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">EXPIRE</span><br><span class="line">EXPIRE key sconds</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查看过期时间(不存在返回-2，键没有过期时间-1)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">TTL</span><br><span class="line">TTL foo</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="实现访问频率限制之一"><a href="#实现访问频率限制之一" class="headerlink" title="实现访问频率限制之一"></a>实现访问频率限制之一</h3><pre><code>示例：
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$isKeyExists = EXISTS rete.limiting:$IP</span><br><span class="line">if $isKeyExists is 1 </span><br><span class="line">	$times = INCR rate.limiting:$IP</span><br><span class="line">	if $times &gt; 100 </span><br><span class="line">		print 访问超限 稍后重试</span><br><span class="line">else </span><br><span class="line">	MULTL</span><br><span class="line">	INCR rate.limiting:$IP</span><br><span class="line">	EXPIRE $keyName, 60</span><br><span class="line">	EXEC</span><br></pre></td></tr></table></figure></code></pre><h3 id="实现访问频率限制之二"><a href="#实现访问频率限制之二" class="headerlink" title="实现访问频率限制之二"></a>实现访问频率限制之二</h3><pre><code>示例：
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">$listLength = L:EN rate.limiting:$IP</span><br><span class="line">if $listLength &lt; 10</span><br><span class="line">	LPUSH rate.limitingL$IP, now()</span><br><span class="line">else </span><br><span class="line">	$time = LINDEX rate.limiting:$IP, -1</span><br><span class="line">	if now() - $time &lt; 60 </span><br><span class="line">		print 超过限制</span><br><span class="line">	else </span><br><span class="line">		LPUSH rate.limiting:$IP, now()</span><br><span class="line">		LTRIM rate.limiting:$IP, 0, 9</span><br><span class="line"></span><br><span class="line">// now() 获得当前Unix时间</span><br></pre></td></tr></table></figure></code></pre>
         </div>
         
           
@@ -482,10 +509,10 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-08-12T11:06:00+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-08-15T15:33:01+08:00">
   <a class='notlink'>
     <i class="fas fa-clock" aria-hidden="true"></i>
-    <p>最后更新于 Aug 12, 2019</p>
+    <p>最後更新於 Aug 15, 2019</p>
   </a>
 </div>
 
@@ -566,7 +593,7 @@ Redis 命令行客户端1redis-cli -h IP -p port"
                 
                     <section class="prev">
                         <span class="art-item-left">
-                            <h6><i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;上一页</h6>
+                            <h6><i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;上一頁</h6>
                             <h4>
                                 <a href="/2019/08/09/数据结构/" rel="prev" title="数据结构">
                                   
@@ -586,7 +613,7 @@ Redis 命令行客户端1redis-cli -h IP -p port"
                 
                     <section class="next">
                         <span class="art-item-right" aria-hidden="true">
-                            <h6>下一页&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i></h6>
+                            <h6>下一頁&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i></h6>
                             <h4>
                                 <a href="/2018/08/07/策略模式/" rel="prev" title="策略模式">
                                     
@@ -693,14 +720,14 @@ Redis 命令行客户端1redis-cli -h IP -p port"
   <section class='widget toc-wrapper'>
     
 <header class='pure'>
-  <div><i class="fas fa-list fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;本文目录</div>
+  <div><i class="fas fa-list fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;本文目錄</div>
   
     <div class='wrapper'><a class="s-toc rightBtn" rel="external nofollow noopener noreferrer" href="javascript:void(0)"><i class="fas fa-thumbtack fa-fw"></i></a></div>
   
 </header>
 
     <div class='content pure'>
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#准备"><span class="toc-text">准备</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Redis安装"><span class="toc-text">Redis安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#启动"><span class="toc-text">启动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Redis-命令行客户端"><span class="toc-text">Redis 命令行客户端</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#入门"><span class="toc-text">入门</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#常用命令"><span class="toc-text">常用命令</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#字符串类型"><span class="toc-text">字符串类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#命令"><span class="toc-text">命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实践"><span class="toc-text">实践</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#使用示例"><span class="toc-text">使用示例</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#散列类型（字典，哈希表）"><span class="toc-text">散列类型（字典，哈希表）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#命令-1"><span class="toc-text">命令</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#使用示例-1"><span class="toc-text">使用示例</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#列表类型"><span class="toc-text">列表类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#命令-2"><span class="toc-text">命令</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#使用示例-2"><span class="toc-text">使用示例</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#集合"><span class="toc-text">集合</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#命令-3"><span class="toc-text">命令</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#有序集合"><span class="toc-text">有序集合</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#使用场景"><span class="toc-text">使用场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#命令-4"><span class="toc-text">命令</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#使用示例-3"><span class="toc-text">使用示例</span></a></li></ol></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#准备"><span class="toc-text">准备</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Redis安装"><span class="toc-text">Redis安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#启动"><span class="toc-text">启动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Redis-命令行客户端"><span class="toc-text">Redis 命令行客户端</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#入门"><span class="toc-text">入门</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#常用命令"><span class="toc-text">常用命令</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#字符串类型"><span class="toc-text">字符串类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#命令"><span class="toc-text">命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实践"><span class="toc-text">实践</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#使用示例"><span class="toc-text">使用示例</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#散列类型（字典，哈希表）"><span class="toc-text">散列类型（字典，哈希表）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#命令-1"><span class="toc-text">命令</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#使用示例-1"><span class="toc-text">使用示例</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#列表类型"><span class="toc-text">列表类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#命令-2"><span class="toc-text">命令</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#使用示例-2"><span class="toc-text">使用示例</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#集合"><span class="toc-text">集合</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#命令-3"><span class="toc-text">命令</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#有序集合"><span class="toc-text">有序集合</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#使用场景"><span class="toc-text">使用场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#命令-4"><span class="toc-text">命令</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#使用示例-3"><span class="toc-text">使用示例</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#事务"><span class="toc-text">事务</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#概述："><span class="toc-text">概述：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#使用示例-4"><span class="toc-text">使用示例</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#错误处理"><span class="toc-text">错误处理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#watch-命令介绍"><span class="toc-text">watch 命令介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#概述：watch-命令可以监控一个或多个键，一点其中有一个键被修改（或删除），之后的事务就不会执行。监控一直持续到EXEC命令（事务中的命令是在EXEC之后才执行的，所以在MULTI命令后可以修改WATCH监控的键值）"><span class="toc-text">概述：watch 命令可以监控一个或多个键，一点其中有一个键被修改（或删除），之后的事务就不会执行。监控一直持续到EXEC命令（事务中的命令是在EXEC之后才执行的，所以在MULTI命令后可以修改WATCH监控的键值）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#示例"><span class="toc-text">示例</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#过期时间"><span class="toc-text">过期时间</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#实现访问频率限制之一"><span class="toc-text">实现访问频率限制之一</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实现访问频率限制之二"><span class="toc-text">实现访问频率限制之二</span></a></li></ol></li></ol>
     </div>
   </section>
 
@@ -767,7 +794,7 @@ Redis 命令行客户端1redis-cli -h IP -p port"
   <section class='widget category'>
     
 <header class='pure'>
-  <div><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;文章分类</div>
+  <div><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;文章分類</div>
   
     <a class="rightBtn"
     
@@ -808,7 +835,7 @@ Redis 命令行客户端1redis-cli -h IP -p port"
   <section class='widget tagcloud'>
     
 <header class='pure'>
-  <div><i class="fas fa-fire fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;热门标签</div>
+  <div><i class="fas fa-fire fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;熱門標籤</div>
   
     <a class="rightBtn"
     
@@ -867,17 +894,17 @@ Redis 命令行客户端1redis-cli -h IP -p port"
     </div>
   
   <br>
-  <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
+  <div><p>博客內容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh_TW">姓名標示-非商業性-相同方式分享 4.0 國際 (CC BY-NC-SA 4.0) 協議</a></p>
 </div>
   <div>
     本站使用
     <a href="https://xaoxuu.com/wiki/material-x/" target="_blank" class="codename">Material X</a>
-    作为主题
+    as theme
     
       ，
-      总访问量为
+      total visits
       <span id="busuanzi_value_site_pv"><i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span>
-      次
+      times
     
     。
   </div>
@@ -960,15 +987,15 @@ Redis 命令行客户端1redis-cli -h IP -p port"
 <!-- 复制 -->
 <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
 <script>
-  let COPY_SUCCESS = "复制成功";
-  let COPY_FAILURE = "复制失败";
+  let COPY_SUCCESS = "複製成功";
+  let COPY_FAILURE = "複製失敗";
   /*页面载入完成后，创建复制按钮*/
   !function (e, t, a) {
     /* code */
     var initCopyCode = function(){
       var copyHtml = '';
       copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
-      copyHtml += '  <i class="fa fa-copy"></i><span>复制</span>';
+      copyHtml += '  <i class="fa fa-copy"></i><span>複製</span>';
       copyHtml += '</button>';
       $(".highlight .code pre").before(copyHtml);
       var clipboard = new ClipboardJS('.btn-copy', {
