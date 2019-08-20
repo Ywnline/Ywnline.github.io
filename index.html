@@ -66,7 +66,7 @@
 			
 				<div class="m_search">
 					<form name="searchform" class="form u-search-form">
-						<input type="text" class="input u-search-input" placeholder="搜索" />
+						<input type="text" class="input u-search-input" placeholder="搜尋" />
 						<i class="icon fas fa-search fa-fw"></i>
 					</form>
 				</div>
@@ -170,9 +170,105 @@
         
           
         
+          
+        
       
     
     
+      
+        
+          <div class='post-wrapper'>
+            <article class="post reveal ">
+  
+
+
+  <section class='meta'>
+    
+    
+    <div class="meta" id="header-meta">
+      
+        
+  <h2 class="title">
+    <a href="/2019/08/20/GOLANG测试/">
+      GOLANG测试
+    </a>
+  </h2>
+
+
+      
+      <div class='new-meta-box'>
+        
+          
+        
+          
+            
+  <div class='new-meta-item author'>
+    <a href="http://blog.yuewei.fun" rel="nofollow">
+      
+        <i class="fas fa-user" aria-hidden="true"></i>
+      
+      <p>Ywnline</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2019-08-20</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+
+          
+        
+          
+            
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      <h2 id="testing-单元测试"><a href="#testing-单元测试" class="headerlink" title="testing - 单元测试"></a>testing - 单元测试</h2><p>testing 为GO语言package 提供自动化测试的支持</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">func TestXxx(*testing.T)</span><br></pre></td></tr></table></figure>
+
+<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><h4 id="要测试的代码："><a href="#要测试的代码：" class="headerlink" title="要测试的代码："></a>要测试的代码：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">func Fib(n int) int &#123;</span><br><span class="line">        if n &lt; 2 &#123;</span><br><span class="line">                return n</span><br><span class="line">        &#125;</span><br><span class="line">        return Fib(n-1) + Fib(n-1)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="测试代码："><a href="#测试代码：" class="headerlink" title="测试代码："></a>测试代码：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">func TestFib(t *testing.T) &#123;</span><br><span class="line">    var (</span><br><span class="line">        in       = 7</span><br><span class="line">        expected = 13</span><br><span class="line">    )</span><br><span class="line">    actual := Fib(in)</span><br><span class="line">    if actual != expected &#123;</span><br><span class="line">        t.Errorf(&quot;Fib(%d) = %d; expected %d&quot;, in, actual, expected)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ go test .</span><br><span class="line">--- FAIL: TestSum (0.00s)</span><br><span class="line">    t_test.go:16: Fib(10) = 64; expected 13</span><br><span class="line">FAIL</span><br><span class="line">FAIL    chapter09/testing    0.009s</span><br></pre></td></tr></table></figure>
+
+<h3 id="Table-Driven-Test"><a href="#Table-Driven-Test" class="headerlink" title="Table-Driven Test"></a>Table-Driven Test</h3><h3 id="case-覆盖"><a href="#case-覆盖" class="headerlink" title="case 覆盖"></a>case 覆盖</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">func TestFib(t *testing.T) &#123;</span><br><span class="line">    var fibTests = []struct &#123;</span><br><span class="line">        in       int // input</span><br><span class="line">        expected int // expected result</span><br><span class="line">    &#125;&#123;</span><br><span class="line">        &#123;1, 1&#125;,</span><br><span class="line">        &#123;2, 1&#125;,</span><br><span class="line">        &#123;3, 2&#125;,</span><br><span class="line">        &#123;4, 3&#125;,</span><br><span class="line">        &#123;5, 5&#125;,</span><br><span class="line">        &#123;6, 8&#125;,</span><br><span class="line">        &#123;7, 13&#125;,</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    for _, tt := range fibTests &#123;</span><br><span class="line">        actual := Fib(tt.in)</span><br><span class="line">        if actual != tt.expected &#123;</span><br><span class="line">            t.Errorf(&quot;Fib(%d) = %d; expected %d&quot;, tt.in, actual, tt.expected)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+  </section>
+</article>
+
+          </div>
+        
       
         
           <div class='post-wrapper'>
@@ -252,7 +348,7 @@
         <div class="readmore">
           <a href="/2019/08/09/数据结构/" class="flat-box">
             <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
-            阅读全文
+            閱讀全文
           </a>
         </div>
       
@@ -359,7 +455,7 @@
         <div class="readmore">
           <a href="/2019/08/08/Redis学习/" class="flat-box">
             <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
-            阅读全文
+            閱讀全文
           </a>
         </div>
       
@@ -463,7 +559,7 @@
         <div class="readmore">
           <a href="/2018/08/07/策略模式/" class="flat-box">
             <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
-            阅读全文
+            閱讀全文
           </a>
         </div>
       
@@ -559,7 +655,7 @@
         <div class="readmore">
           <a href="/2018/08/07/设计原则/" class="flat-box">
             <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
-            阅读全文
+            閱讀全文
           </a>
         </div>
       
@@ -665,7 +761,7 @@
         <div class="readmore">
           <a href="/2018/08/03/设计模式学习-简单工厂模式/" class="flat-box">
             <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
-            阅读全文
+            閱讀全文
           </a>
         </div>
       
@@ -769,7 +865,7 @@
         <div class="readmore">
           <a href="/2018/08/03/排序/" class="flat-box">
             <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
-            阅读全文
+            閱讀全文
           </a>
         </div>
       
@@ -777,9 +873,9 @@
     
       <div class="full-width auto-padding tags">
         
-          <a href="/tags/排序/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>排序</a>
-        
           <a href="/tags/算法/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>算法</a>
+        
+          <a href="/tags/排序/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>排序</a>
         
       </div>
     
@@ -875,7 +971,7 @@
         <div class="readmore">
           <a href="/2018/08/02/二叉树/" class="flat-box">
             <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
-            阅读全文
+            閱讀全文
           </a>
         </div>
       
@@ -883,9 +979,9 @@
     
       <div class="full-width auto-padding tags">
         
-          <a href="/tags/排序/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>排序</a>
-        
           <a href="/tags/算法/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>算法</a>
+        
+          <a href="/tags/排序/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>排序</a>
         
       </div>
     
@@ -981,7 +1077,7 @@
         <div class="readmore">
           <a href="/2018/06/13/初级算法学习步骤/" class="flat-box">
             <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
-            阅读全文
+            閱讀全文
           </a>
         </div>
       
@@ -1085,7 +1181,7 @@
         <div class="readmore">
           <a href="/2017/08/06/操作系统引论/" class="flat-box">
             <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
-            阅读全文
+            閱讀全文
           </a>
         </div>
       
@@ -1094,112 +1190,6 @@
       <div class="full-width auto-padding tags">
         
           <a href="/tags/操作系统/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>操作系统</a>
-        
-      </div>
-    
-  </section>
-</article>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <article class="post reveal ">
-  
-
-
-  <section class='meta'>
-    
-    
-    <div class="meta" id="header-meta">
-      
-        
-  <h2 class="title">
-    <a href="/2017/08/04/Linux/">
-      Linux
-    </a>
-  </h2>
-
-
-      
-      <div class='new-meta-box'>
-        
-          
-        
-          
-            
-  <div class='new-meta-item author'>
-    <a href="http://blog.yuewei.fun" rel="nofollow">
-      
-        <i class="fas fa-user" aria-hidden="true"></i>
-      
-      <p>Ywnline</p>
-    </a>
-  </div>
-
-
-          
-        
-          
-            <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2017-08-04</p>
-  </a>
-</div>
-
-          
-        
-          
-            
-  
-  <div class='new-meta-item category'>
-    <a href='/categories/算法排序/' rel="nofollow">
-      <i class="fas fa-folder-open" aria-hidden="true"></i>
-      <p>算法排序</p>
-    </a>
-  </div>
-
-
-          
-        
-          
-            
-
-          
-        
-          
-            
-
-          
-        
-      </div>
-      
-        <hr>
-      
-    </div>
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      <h2 id="LINUX常用命令（基础）"><a href="#LINUX常用命令（基础）" class="headerlink" title="LINUX常用命令（基础）"></a>LINUX常用命令（基础）</h2><ul>
-<li>man 对你熟悉或不熟悉的命令提供帮助解释<ul>
-<li>eg:man ls 就可以查看ls相关的用法</li></ul></li></ul>
-      
-        <div class="readmore">
-          <a href="/2017/08/04/Linux/" class="flat-box">
-            <i class="fas fa-book-open fa-fw" aria-hidden="true"></i>
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-    
-      <div class="full-width auto-padding tags">
-        
-          <a href="/tags/服务器/" rel="nofollow"><i class="fas fa-hashtag fa-fw"></i>服务器</a>
         
       </div>
     
@@ -1223,7 +1213,7 @@
           
             <a class="next" rel="next" href="/page/2/">
               <section class="post next">
-                &nbsp;下一页&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i>
+                &nbsp;下一頁&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i>
               </section>
             </a>
           
@@ -1357,7 +1347,7 @@
   <section class='widget category'>
     
 <header class='pure'>
-  <div><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;文章分类</div>
+  <div><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;文章分類</div>
   
     <a class="rightBtn"
     
@@ -1398,7 +1388,7 @@
   <section class='widget tagcloud'>
     
 <header class='pure'>
-  <div><i class="fas fa-fire fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;热门标签</div>
+  <div><i class="fas fa-fire fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;熱門標籤</div>
   
     <a class="rightBtn"
     
@@ -1457,15 +1447,15 @@
     </div>
   
   <br>
-  <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
+  <div><p>博客內容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh_TW">姓名標示-非商業性-相同方式分享 4.0 國際 (CC BY-NC-SA 4.0) 協議</a></p>
 </div>
   <div>
     本站使用
     <a href="https://xaoxuu.com/wiki/material-x/" target="_blank" class="codename">Material X</a>
-    作为主题
+    作為主題
     
       ，
-      总访问量为
+      總訪問量為
       <span id="busuanzi_value_site_pv"><i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span>
       次
     
@@ -1550,15 +1540,15 @@
 <!-- 复制 -->
 <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
 <script>
-  let COPY_SUCCESS = "复制成功";
-  let COPY_FAILURE = "复制失败";
+  let COPY_SUCCESS = "複製成功";
+  let COPY_FAILURE = "複製失敗";
   /*页面载入完成后，创建复制按钮*/
   !function (e, t, a) {
     /* code */
     var initCopyCode = function(){
       var copyHtml = '';
       copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
-      copyHtml += '  <i class="fa fa-copy"></i><span>复制</span>';
+      copyHtml += '  <i class="fa fa-copy"></i><span>複製</span>';
       copyHtml += '</button>';
       $(".highlight .code pre").before(copyHtml);
       var clipboard = new ClipboardJS('.btn-copy', {
