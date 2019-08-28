@@ -66,7 +66,7 @@
 			
 				<div class="m_search">
 					<form name="searchform" class="form u-search-form">
-						<input type="text" class="input u-search-input" placeholder="搜索" />
+						<input type="text" class="input u-search-input" placeholder="Search" />
 						<i class="icon fas fa-search fa-fw"></i>
 					</form>
 				</div>
@@ -578,6 +578,93 @@
 <li>对该数据结构进行操作的一组过程</li>
 <li>对局部于管程的共享数据设置初始值得语句</li>
 </ul>
+<h2 id="线程的基本概念"><a href="#线程的基本概念" class="headerlink" title="线程的基本概念"></a>线程的基本概念</h2><h3 id="线程的引入"><a href="#线程的引入" class="headerlink" title="线程的引入"></a>线程的引入</h3><p>OS中引入进程目的为了使程序并发执行，提高资源利用率和系统吞吐量<br>OS中一如线程则是为了减少程序在并发执行时所付出的时空开销，使OS有更好的并发性</p>
+<h4 id="进程的两个基本属性"><a href="#进程的两个基本属性" class="headerlink" title="进程的两个基本属性"></a>进程的两个基本属性</h4><ol>
+<li>进程是一个可拥有独立资源的独立单位，一个进程要独立运行，必须拥有一定资源（存放程序正文、数据的磁盘和内存地址空间以及I/O设备打开的文件、信号量等）</li>
+<li>进程同时又可是一个可独立运行调度和分配的基本单位，一个进程要独立运行，必须是一个可独立调度和分配的基本单位。每个进程在系统中有唯一的PCB，系统可根据其PCB感知进程的存在，也可以根据PCB中的信息对进程进行调度，还可以将端点信息保存在PCB中，利用进程PCB回复运行现场，程序独立运行的基本单位正是有这两个基本属性构成的</li>
+</ol>
+<h4 id="进程并发执行所需付出的时空开销"><a href="#进程并发执行所需付出的时空开销" class="headerlink" title="进程并发执行所需付出的时空开销"></a>进程并发执行所需付出的时空开销</h4><ul>
+<li>创建进程</li>
+<li>撤销经常</li>
+<li>进程切换  </li>
+</ul>
+<h4 id="进程——作为资源调度分配的基本单位"><a href="#进程——作为资源调度分配的基本单位" class="headerlink" title="进程——作为资源调度分配的基本单位"></a>进程——作为资源调度分配的基本单位</h4><h4 id="线程与进程的比较"><a href="#线程与进程的比较" class="headerlink" title="线程与进程的比较"></a>线程与进程的比较</h4><p>线程具有许多传统进程锁具有的特征</p>
+<ol>
+<li>调度的基本单位</li>
+</ol>
+<ul>
+<li>进程<ul>
+<li>进程是作为独立调度和分配的基本单位，因此进程是指能独立运行的基本单位。</li>
+<li>每次调度都时都需要进行上下文切换，开销较大</li>
+</ul>
+</li>
+<li>线程<ul>
+<li>引入线程把线程作为调度和分配的基本单位，因而线程是能够独立运行的基本单位</li>
+<li>在线程切换时仅需保存和设置少量寄存器内容，切换代价远低于进程</li>
+<li>同一进程中，线程切换不会引起进程切换</li>
+<li>从一个进程中的线程切换到另一个进程中的线程时，必然会引起进程切换</li>
+</ul>
+</li>
+</ul>
+<ol start="2">
+<li>并发性</li>
+</ol>
+<p>不仅进程之间可以并发执行，而在一个进程中的所有线程也可以并发执行，不同进程中的线程也可以并发执行</p>
+<ol start="3">
+<li>拥有资源</li>
+</ol>
+<ul>
+<li>进程可以拥有资源，并作为系统中拥有资源的一个基本单位</li>
+<li>线程本身并不拥有系统资源，而且仅有一点必不可少的、能保证独立运行的资源</li>
+<li>线程除了拥有自己的少量资源外，还允许多个进程共享该进程所拥有的资源<ul>
+<li>属于同一进程的所有线程都具有相同的地址空间</li>
+<li>线程可以访问改地址空间中的每一个虚地址</li>
+<li>还可以访问进程所拥有的资源</li>
+</ul>
+</li>
+</ul>
+<ol start="4">
+<li>独立性</li>
+</ol>
+<p>同一进程中的不同线程之间的独立性要比不能进程之间的独立性低得多</p>
+<ol start="5">
+<li>系统开销</li>
+</ol>
+<p>在创建或撤销进程时，系统都要为之分配和回收进程控制块、分配或回收其他资源</p>
+<ol start="6">
+<li>支持多处理系统</li>
+</ol>
+<p>多处理机系统中，对于传统的进程，单线程进程，不管有多少处理机该进程只能运行在一个处理机上。<br>多线程进程就可以将一个进程中的多个线程分配到多个处理机上</p>
+<h3 id="线程状态和线程控制块"><a href="#线程状态和线程控制块" class="headerlink" title="线程状态和线程控制块"></a>线程状态和线程控制块</h3><ol>
+<li>线程运行三个状态</li>
+</ol>
+<ul>
+<li>执行状态<ul>
+<li>已获得处理机正在运行</li>
+</ul>
+</li>
+<li>就绪状态<ul>
+<li>以具备各种执行条件，只需获得CPU便可立即执行</li>
+</ul>
+</li>
+<li>阻塞状态 <ul>
+<li>因某事件受阻而处于暂停状态</li>
+</ul>
+</li>
+</ul>
+<ol start="2">
+<li>线程控制块TCB</li>
+</ol>
+<p>每个线程配置一个线程控制块TCB，将所有用于控制和管理线程的信息记录在线程控制块中</p>
+<ul>
+<li>线程标识符</li>
+<li>一组寄存器</li>
+<li>线程运行状态</li>
+<li>优先级</li>
+<li>线程专有存储区</li>
+<li>信号品屏蔽</li>
+<li>堆栈指针</li>
+</ul>
 
         </div>
         
@@ -589,10 +676,10 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-08-22T14:04:22+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-08-28T17:12:29+08:00">
   <a class='notlink'>
     <i class="fas fa-clock" aria-hidden="true"></i>
-    <p>最后更新于 Aug 22, 2019</p>
+    <p>last updated at Aug 28, 2019</p>
   </a>
 </div>
 
@@ -664,7 +751,7 @@
                 
                     <section class="prev">
                         <span class="art-item-left">
-                            <h6><i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;上一页</h6>
+                            <h6><i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;Previous</h6>
                             <h4>
                                 <a href="/2017/08/04/CentOS7安装过程/" rel="prev" title="CentOS7安装过程">
                                   
@@ -684,7 +771,7 @@
                 
                     <section class="next">
                         <span class="art-item-right" aria-hidden="true">
-                            <h6>下一页&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i></h6>
+                            <h6>Next&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i></h6>
                             <h4>
                                 <a href="/2017/06/03/运输层/" rel="prev" title="运输层">
                                     
@@ -791,14 +878,14 @@
   <section class='widget toc-wrapper'>
     
 <header class='pure'>
-  <div><i class="fas fa-list fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;本文目录</div>
+  <div><i class="fas fa-list fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;TOC</div>
   
     <div class='wrapper'><a class="s-toc rightBtn" rel="external nofollow noopener noreferrer" href="javascript:void(0)"><i class="fas fa-thumbtack fa-fw"></i></a></div>
   
 </header>
 
     <div class='content pure'>
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前趋图和程序执行"><span class="toc-text">前趋图和程序执行</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#前趋图"><span class="toc-text">前趋图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#程序顺序执行"><span class="toc-text">程序顺序执行</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#程序的顺序执行"><span class="toc-text">程序的顺序执行</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#程序执行的特征"><span class="toc-text">程序执行的特征</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#程序并发执行"><span class="toc-text">程序并发执行</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#程序并发执行-1"><span class="toc-text">程序并发执行</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#程序并发执行时的特征"><span class="toc-text">程序并发执行时的特征</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#进程的描述"><span class="toc-text">进程的描述</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#进程的定义和特征"><span class="toc-text">进程的定义和特征</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#进程的定义"><span class="toc-text">进程的定义</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#进程的特征"><span class="toc-text">进程的特征</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#进程的基本状态及转换"><span class="toc-text">进程的基本状态及转换</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#进程的三种基本状态"><span class="toc-text">进程的三种基本状态</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#三种状态基本转换"><span class="toc-text">三种状态基本转换</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#创建状态和终止状态"><span class="toc-text">创建状态和终止状态</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#挂起操作和进程状态的转变"><span class="toc-text">挂起操作和进程状态的转变</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#挂起操作的引入"><span class="toc-text">挂起操作的引入</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#引入挂起原语操作后三个进程状态转换"><span class="toc-text">引入挂起原语操作后三个进程状态转换</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#引入挂起操作后五个进程状态的转换"><span class="toc-text">引入挂起操作后五个进程状态的转换</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#进程管理中的数据结构"><span class="toc-text">进程管理中的数据结构</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#操作系统中用于管理控制的数据结构"><span class="toc-text">操作系统中用于管理控制的数据结构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#进程控制块PCB的作用"><span class="toc-text">进程控制块PCB的作用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#进程控制块中的信息"><span class="toc-text">进程控制块中的信息</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#进程控制块的组织方式"><span class="toc-text">进程控制块的组织方式</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#进程控制"><span class="toc-text">进程控制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#进程系统内核"><span class="toc-text">进程系统内核</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#支撑功能"><span class="toc-text">支撑功能</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#进程的创建"><span class="toc-text">进程的创建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#进程的终止"><span class="toc-text">进程的终止</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#进程的阻塞和唤醒"><span class="toc-text">进程的阻塞和唤醒</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#引起进程阻塞和唤醒的事件"><span class="toc-text">引起进程阻塞和唤醒的事件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#进程阻塞过程（block）"><span class="toc-text">进程阻塞过程（block）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#进程唤醒过程（wakeup）"><span class="toc-text">进程唤醒过程（wakeup）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#进程的挂起与激活"><span class="toc-text">进程的挂起与激活</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#进程的挂起"><span class="toc-text">进程的挂起</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#进程的激活过程"><span class="toc-text">进程的激活过程</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#进程同步"><span class="toc-text">进程同步</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#进程同步的基本概念"><span class="toc-text">进程同步的基本概念</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#两种形式制约关系"><span class="toc-text">两种形式制约关系</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#临界资源"><span class="toc-text">临界资源</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#临界区"><span class="toc-text">临界区</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#同步机制应遵循的规则"><span class="toc-text">同步机制应遵循的规则</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#硬件同步机制"><span class="toc-text">硬件同步机制</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#关中断"><span class="toc-text">关中断</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#利用Test-and-Set指令实现互斥"><span class="toc-text">利用Test-and-Set指令实现互斥</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#利用Swap指令实现进程互斥"><span class="toc-text">利用Swap指令实现进程互斥</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#信号量机制"><span class="toc-text">信号量机制</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#整形信号量"><span class="toc-text">整形信号量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#记录信号量"><span class="toc-text">记录信号量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#AND型信号量"><span class="toc-text">AND型信号量</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#信号量的应用"><span class="toc-text">信号量的应用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#利用信号量实现进程互斥"><span class="toc-text">利用信号量实现进程互斥</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#利用信号量实现前去关系"><span class="toc-text">利用信号量实现前去关系</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#管程机制"><span class="toc-text">管程机制</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#管程定义"><span class="toc-text">管程定义</span></a></li></ol></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前趋图和程序执行"><span class="toc-text">前趋图和程序执行</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#前趋图"><span class="toc-text">前趋图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#程序顺序执行"><span class="toc-text">程序顺序执行</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#程序的顺序执行"><span class="toc-text">程序的顺序执行</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#程序执行的特征"><span class="toc-text">程序执行的特征</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#程序并发执行"><span class="toc-text">程序并发执行</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#程序并发执行-1"><span class="toc-text">程序并发执行</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#程序并发执行时的特征"><span class="toc-text">程序并发执行时的特征</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#进程的描述"><span class="toc-text">进程的描述</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#进程的定义和特征"><span class="toc-text">进程的定义和特征</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#进程的定义"><span class="toc-text">进程的定义</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#进程的特征"><span class="toc-text">进程的特征</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#进程的基本状态及转换"><span class="toc-text">进程的基本状态及转换</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#进程的三种基本状态"><span class="toc-text">进程的三种基本状态</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#三种状态基本转换"><span class="toc-text">三种状态基本转换</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#创建状态和终止状态"><span class="toc-text">创建状态和终止状态</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#挂起操作和进程状态的转变"><span class="toc-text">挂起操作和进程状态的转变</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#挂起操作的引入"><span class="toc-text">挂起操作的引入</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#引入挂起原语操作后三个进程状态转换"><span class="toc-text">引入挂起原语操作后三个进程状态转换</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#引入挂起操作后五个进程状态的转换"><span class="toc-text">引入挂起操作后五个进程状态的转换</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#进程管理中的数据结构"><span class="toc-text">进程管理中的数据结构</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#操作系统中用于管理控制的数据结构"><span class="toc-text">操作系统中用于管理控制的数据结构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#进程控制块PCB的作用"><span class="toc-text">进程控制块PCB的作用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#进程控制块中的信息"><span class="toc-text">进程控制块中的信息</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#进程控制块的组织方式"><span class="toc-text">进程控制块的组织方式</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#进程控制"><span class="toc-text">进程控制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#进程系统内核"><span class="toc-text">进程系统内核</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#支撑功能"><span class="toc-text">支撑功能</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#进程的创建"><span class="toc-text">进程的创建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#进程的终止"><span class="toc-text">进程的终止</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#进程的阻塞和唤醒"><span class="toc-text">进程的阻塞和唤醒</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#引起进程阻塞和唤醒的事件"><span class="toc-text">引起进程阻塞和唤醒的事件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#进程阻塞过程（block）"><span class="toc-text">进程阻塞过程（block）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#进程唤醒过程（wakeup）"><span class="toc-text">进程唤醒过程（wakeup）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#进程的挂起与激活"><span class="toc-text">进程的挂起与激活</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#进程的挂起"><span class="toc-text">进程的挂起</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#进程的激活过程"><span class="toc-text">进程的激活过程</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#进程同步"><span class="toc-text">进程同步</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#进程同步的基本概念"><span class="toc-text">进程同步的基本概念</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#两种形式制约关系"><span class="toc-text">两种形式制约关系</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#临界资源"><span class="toc-text">临界资源</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#临界区"><span class="toc-text">临界区</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#同步机制应遵循的规则"><span class="toc-text">同步机制应遵循的规则</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#硬件同步机制"><span class="toc-text">硬件同步机制</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#关中断"><span class="toc-text">关中断</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#利用Test-and-Set指令实现互斥"><span class="toc-text">利用Test-and-Set指令实现互斥</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#利用Swap指令实现进程互斥"><span class="toc-text">利用Swap指令实现进程互斥</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#信号量机制"><span class="toc-text">信号量机制</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#整形信号量"><span class="toc-text">整形信号量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#记录信号量"><span class="toc-text">记录信号量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#AND型信号量"><span class="toc-text">AND型信号量</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#信号量的应用"><span class="toc-text">信号量的应用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#利用信号量实现进程互斥"><span class="toc-text">利用信号量实现进程互斥</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#利用信号量实现前去关系"><span class="toc-text">利用信号量实现前去关系</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#管程机制"><span class="toc-text">管程机制</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#管程定义"><span class="toc-text">管程定义</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#线程的基本概念"><span class="toc-text">线程的基本概念</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#线程的引入"><span class="toc-text">线程的引入</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#进程的两个基本属性"><span class="toc-text">进程的两个基本属性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#进程并发执行所需付出的时空开销"><span class="toc-text">进程并发执行所需付出的时空开销</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#进程——作为资源调度分配的基本单位"><span class="toc-text">进程——作为资源调度分配的基本单位</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#线程与进程的比较"><span class="toc-text">线程与进程的比较</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#线程状态和线程控制块"><span class="toc-text">线程状态和线程控制块</span></a></li></ol></li></ol>
     </div>
   </section>
 
@@ -865,7 +952,7 @@
   <section class='widget category'>
     
 <header class='pure'>
-  <div><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;文章分类</div>
+  <div><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;Categories</div>
   
     <a class="rightBtn"
     
@@ -906,7 +993,7 @@
   <section class='widget tagcloud'>
     
 <header class='pure'>
-  <div><i class="fas fa-fire fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;热门标签</div>
+  <div><i class="fas fa-fire fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;Hot Tags</div>
   
     <a class="rightBtn"
     
@@ -965,19 +1052,19 @@
     </div>
   
   <br>
-  <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
+  <div><p>Blog content follows the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en">Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0) License</a></p>
 </div>
   <div>
-    本站使用
+    Use
     <a href="https://xaoxuu.com/wiki/material-x/" target="_blank" class="codename">Material X</a>
-    作为主题
+    as theme
     
-      ，
-      总访问量为
+      , 
+      total visits
       <span id="busuanzi_value_site_pv"><i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span>
-      次
+      times
     
-    。
+    . 
   </div>
 </footer>
 <script>setLoadingBarProgress(80);</script>
@@ -1058,15 +1145,15 @@
 <!-- 复制 -->
 <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
 <script>
-  let COPY_SUCCESS = "复制成功";
-  let COPY_FAILURE = "复制失败";
+  let COPY_SUCCESS = "Copied";
+  let COPY_FAILURE = "Copy failed";
   /*页面载入完成后，创建复制按钮*/
   !function (e, t, a) {
     /* code */
     var initCopyCode = function(){
       var copyHtml = '';
       copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
-      copyHtml += '  <i class="fa fa-copy"></i><span>复制</span>';
+      copyHtml += '  <i class="fa fa-copy"></i><span>Copy</span>';
       copyHtml += '</button>';
       $(".highlight .code pre").before(copyHtml);
       var clipboard = new ClipboardJS('.btn-copy', {
