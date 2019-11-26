@@ -192,9 +192,9 @@
       
         <tags>
             
-            <tag> 算法 </tag>
-            
             <tag> 排序 </tag>
+            
+            <tag> 算法 </tag>
             
         </tags>
       
@@ -219,9 +219,9 @@
       
         <tags>
             
-            <tag> 算法 </tag>
-            
             <tag> 排序 </tag>
+            
+            <tag> 算法 </tag>
             
         </tags>
       
@@ -247,6 +247,31 @@
         <tags>
             
             <tag> 算法 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>linux学习-grep命令</title>
+      <link href="/2018/01/16/linux%E5%AD%A6%E4%B9%A0-grep%E5%91%BD%E4%BB%A4/"/>
+      <url>/2018/01/16/linux%E5%AD%A6%E4%B9%A0-grep%E5%91%BD%E4%BB%A4/</url>
+      
+        <content type="html"><![CDATA[<h2 id="grep命令"><a href="#grep命令" class="headerlink" title="grep命令"></a>grep命令</h2><p> grep（global search regular expression(RE) and print out the line，全面搜索正则表达式并把行打印出来）是一种强大的文本搜索工具，它能使用正则表达式搜索文本，并把匹配的行打印出来。</p> <a id="more"></a><h2 id="测试用例"><a href="#测试用例" class="headerlink" title="测试用例"></a>测试用例</h2><p> testout.txt date 命令，每分钟执行一次的结果，共49622行</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">以前十行为例：</span><br><span class="line">2018年 12月 12日 星期三 14:53:01 CST</span><br><span class="line">2018年 12月 12日 星期三 14:54:01 CST</span><br><span class="line">2018年 12月 12日 星期三 14:55:01 CST</span><br><span class="line">2018年 12月 12日 星期三 14:56:01 CST</span><br><span class="line">2018年 12月 12日 星期三 14:57:01 CST</span><br><span class="line">2018年 12月 12日 星期三 14:58:01 CST</span><br><span class="line">2018年 12月 12日 星期三 14:59:01 CST</span><br><span class="line">2018年 12月 12日 星期三 15:00:01 CST</span><br><span class="line">2018年 12月 12日 星期三 15:01:01 CST</span><br><span class="line">2018年 12月 12日 星期三 15:02:01 CST</span><br></pre></td></tr></table></figure><h2 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h2><ul><li><p>-c 计算符合范本样式的列数。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">grep -c &quot;2018年 12月 14日&quot; testout.txt</span><br><span class="line">1440 #24*60=1440</span><br><span class="line">等同于：</span><br><span class="line">grep &quot;2018年 12月 14日&quot; testout.txt |wc -l</span><br></pre></td></tr></table></figure></li><li><p>-A&lt;显示列数&gt; 除了显示符合范本样式的那一行之外，并显示该行之后的内容。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">grep -A 0 &quot;2018年 12月 14日 星期五 23:00:01&quot; testout.txt</span><br><span class="line">2018年 12月 14日 星期五 23:00:01 CST</span><br><span class="line">grep -A 2 &quot;2018年 12月 14日 星期五 23:00:01&quot; testout.txt</span><br><span class="line">2018年 12月 14日 星期五 23:00:01 CST</span><br><span class="line">2018年 12月 14日 星期五 23:01:01 CST</span><br><span class="line">2018年 12月 14日 星期五 23:02:01 CST</span><br></pre></td></tr></table></figure></li><li><p>-C&lt;显示列数&gt;或-&lt;显示列数&gt; 除了显示符合范本样式的那一列之外，并显示该列之前后的内容。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">grep -C 2 &quot;2018年 12月 14日 星期五 23:00:01&quot; testout.txt</span><br><span class="line">2018年 12月 14日 星期五 22:58:01 CST</span><br><span class="line">2018年 12月 14日 星期五 22:59:01 CST</span><br><span class="line">2018年 12月 14日 星期五 23:00:01 CST</span><br><span class="line">2018年 12月 14日 星期五 23:01:01 CST</span><br><span class="line">2018年 12月 14日 星期五 23:02:01 CST</span><br></pre></td></tr></table></figure></li><li><p>-P 支持Perl正则表达式</p></li><li><p>-E 支持扩展正则表达式</p></li><li><p>-F 不支持正则表达式，将模式按照字面意思匹配</p></li><li><p>-e 匹配模板，多次使用模板之间关系为 ‘或’</p></li><li><p>-l 只列出含有匹配的文本行的文件的文件名，而不显示具体的匹配内容</p></li><li><p>-L 列出文件内容不符合指定的范本样式的文件名称。</p></li><li><p>-n 列出所有的匹配的文本行，并显示行号</p></li><li><p>-v 只显示不匹配的文本行</p></li><li><p>-R/-r 递归搜索，搜索当前目录和子目录</p></li><li><p>-q 不显示任何信息。</p></li><li><p>-h 在显示符合范本样式的那一列之前，不标示该列所属的文件名称。</p></li><li><p>-H 在显示符合范本样式的那一列之前，标示该列的文件名称。</p></li><li><p>-i/-y 忽略字符大小写的差别。</p></li><li><p>-w 只显示全字符合的列。</p></li><li><p>-s 不显示错误信息。</p></li><li><p>-x 整行内容完全匹配</p></li><li><p>-o 只输出文件中匹配到的部分。</p></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 操作系统 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> linux </tag>
             
         </tags>
       
@@ -390,9 +415,9 @@
       
         <tags>
             
-            <tag> 算法 </tag>
-            
             <tag> 排序 </tag>
+            
+            <tag> 算法 </tag>
             
         </tags>
       
