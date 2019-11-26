@@ -4,6 +4,50 @@
   
     
     <entry>
+      <title>计算机网络学习-基本概念</title>
+      <link href="/2019/11/26/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AD%A6%E4%B9%A0-%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/"/>
+      <url>/2019/11/26/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AD%A6%E4%B9%A0-%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/</url>
+      
+        <content type="html"><![CDATA[<h2 id="各层完成的主要功能"><a href="#各层完成的主要功能" class="headerlink" title="各层完成的主要功能"></a>各层完成的主要功能</h2><ul><li>差错控制，使相应层次对等方的通信更加可靠</li><li>流量控制，发送的发送速率必须使接收方来得及接收，不要太快</li><li>分段和重装，发送端将要发送的数据块划分为更小的单位，在接收端将其还原</li><li>复用和分用，发送端几个高层会话复用一条低层的连接，在接收端再进行分用</li><li>连接建立和释放，交换数据前先建立一条逻辑连接，数据传送结束后释放连接<a id="more"></a></li></ul><h2 id="OSI七层协议体系结构"><a href="#OSI七层协议体系结构" class="headerlink" title="OSI七层协议体系结构"></a>OSI七层协议体系结构</h2><ul><li>应用层</li><li>表现层</li><li>会话层</li><li>传输层</li><li>网络层</li><li>数据链路层</li><li>物理层</li></ul><h2 id="TCP-IP-四层体系结构"><a href="#TCP-IP-四层体系结构" class="headerlink" title="TCP/IP 四层体系结构"></a>TCP/IP 四层体系结构</h2><ul><li>应用层</li><li>传输层</li><li>网络层</li><li>网络接口层</li></ul><h2 id="通用五层体系结构"><a href="#通用五层体系结构" class="headerlink" title="通用五层体系结构"></a>通用五层体系结构</h2><ul><li>应用层</li><li>传输层</li><li>网络层</li><li>数据链路层</li><li>物理层</li></ul><h2 id="协议名词"><a href="#协议名词" class="headerlink" title="协议名词"></a>协议名词</h2><ul><li>PDU (Protocol Data Unit) ，是指协议数据单元</li><li>SAP (Service Access Point)，服务访问点，同一系统相邻两层的实体进行交互的地方</li><li>SDU (Service Data Unit)，服务数据单元，层与层之间交换的数据的单位</li><li>PCI (Protocol Control Infomation)，协议控制信息，每层会附加属于自己的那一层的协议<br>信息</li></ul><h2 id="物理层"><a href="#物理层" class="headerlink" title="物理层"></a>物理层</h2><ul><li>信噪比，信号和平均功率和噪声的平均功率之比</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 计算机网络 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>并发</title>
+      <link href="/2019/09/20/%E5%B9%B6%E5%8F%91/"/>
+      <url>/2019/09/20/%E5%B9%B6%E5%8F%91/</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+      
+      <categories>
+          
+          <category> golang </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 并发 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>GOLANG测试</title>
       <link href="/2019/08/20/GOLANG%E6%B5%8B%E8%AF%95/"/>
       <url>/2019/08/20/GOLANG%E6%B5%8B%E8%AF%95/</url>
@@ -148,9 +192,9 @@
       
         <tags>
             
-            <tag> 排序 </tag>
-            
             <tag> 算法 </tag>
+            
+            <tag> 排序 </tag>
             
         </tags>
       
@@ -175,9 +219,9 @@
       
         <tags>
             
-            <tag> 排序 </tag>
-            
             <tag> 算法 </tag>
+            
+            <tag> 排序 </tag>
             
         </tags>
       
@@ -314,7 +358,7 @@
       
       <categories>
           
-          <category> 计算应网络 </category>
+          <category> 计算机网络 </category>
           
       </categories>
       
@@ -346,9 +390,9 @@
       
         <tags>
             
-            <tag> 排序 </tag>
-            
             <tag> 算法 </tag>
+            
+            <tag> 排序 </tag>
             
         </tags>
       
