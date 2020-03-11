@@ -4,6 +4,45 @@
   
     
     <entry>
+      <title>技术提升</title>
+      <link href="/2020/03/11/%E6%8A%80%E6%9C%AF%E6%8F%90%E5%8D%87/"/>
+      <url>/2020/03/11/%E6%8A%80%E6%9C%AF%E6%8F%90%E5%8D%87/</url>
+      
+        <content type="html"><![CDATA[<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>时间过得真快，不知不觉中已经毕业两年多了，感觉自己的技术任然欠缺很多知识</p><h1 id="2020年技术提升计划及目标"><a href="#2020年技术提升计划及目标" class="headerlink" title="2020年技术提升计划及目标"></a>2020年技术提升计划及目标</h1><a id="more"></a><h2 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h2><h3 id="数据结构-算法"><a href="#数据结构-算法" class="headerlink" title="数据结构 + 算法"></a>数据结构 + 算法</h3><ul><li><p>算法</p><ul><li>对于以下算法无变形基本问题可以做到手写无误</li><li>二分搜索 Binary Search</li><li>分治 Divide Conquer</li><li>宽度优先搜索 Breadth First Search</li><li>深度优先搜索 Depth First Search</li><li>回溯法 Backtracking</li><li>双指针 Two Pointers</li><li>动态规划 Dynamic Programming</li><li>扫描线 Scan-line algorithm</li><li>快排 Quick Sort</li></ul></li><li><p>数据结构</p><ul><li>栈 Stack</li><li>队列 Queue</li><li>链表 Linked List</li><li>数组 Array</li><li>哈希表 Hash Table</li><li>二叉树 Binary Tree  </li><li>堆 Heap</li><li>并查集 Union Find</li><li>字典树 Trie</li></ul></li><li><p>练习方式</p><ul><li>leetcode</li></ul></li></ul><h3 id="操作系统"><a href="#操作系统" class="headerlink" title="操作系统"></a>操作系统</h3><ul><li>书籍<ul><li>《鸟哥的linux私房菜》</li></ul></li></ul><h3 id="网络"><a href="#网络" class="headerlink" title="网络"></a>网络</h3><ul><li>书籍<ul><li>《http权威指南》</li><li>《https权威指南》</li></ul></li></ul><h3 id="Golang"><a href="#Golang" class="headerlink" title="Golang"></a>Golang</h3><ul><li>设计理念<ul><li>并发处理模型</li><li>gc原理</li></ul></li><li>书籍：<ul><li>《深入解析go》</li><li>《go语言学习笔记》</li><li>《go并发编程实战》</li></ul></li></ul><h3 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h3><h3 id="基本设计与操作"><a href="#基本设计与操作" class="headerlink" title="基本设计与操作"></a>基本设计与操作</h3><h3 id="性能优化"><a href="#性能优化" class="headerlink" title="性能优化"></a>性能优化</h3><h3 id="底层结构（索引）"><a href="#底层结构（索引）" class="headerlink" title="底层结构（索引）"></a>底层结构（索引）</h3><ul><li><p>书籍：</p><ul><li>《高性能MySQL》</li><li>《MySQL必知必会》</li><li>《Redis实战》<h3 id="消息队列"><a href="#消息队列" class="headerlink" title="消息队列"></a>消息队列</h3></li></ul></li><li><p>rabbitmq</p></li><li><p>zookeeper</p></li></ul><h3 id="设计模式"><a href="#设计模式" class="headerlink" title="设计模式"></a>设计模式</h3><ul><li>书籍<ul><li>《大话设计模式》</li><li>《设计模式之禅》</li></ul></li></ul><h3 id="基础工具"><a href="#基础工具" class="headerlink" title="基础工具"></a>基础工具</h3><ul><li>git </li></ul><p><a href="https://github.com/livoras/blog/issues/7" target="_blank" rel="noopener">使用git和github进行协同开发流程</a>. </p><h3 id="分布式系统"><a href="#分布式系统" class="headerlink" title="分布式系统"></a>分布式系统</h3><ul><li>docker</li><li>k8s</li></ul>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Golang的接口</title>
+      <link href="/2019/12/04/Golang%E7%9A%84%E6%8E%A5%E5%8F%A3/"/>
+      <url>/2019/12/04/Golang%E7%9A%84%E6%8E%A5%E5%8F%A3/</url>
+      
+        <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>接口在面向对象编程中是经常使用的招式，也是体现多态很重要的手段。<br>是的。Golang中也有接口这玩意儿。</p><p>本文将以通俗易懂的方式，说清楚Golang的接口。</p><p>10s后，以下知识点即将到达战场：<br>1.为什么需要接口？<br>2.接口是什么？如何定义？<br>3.接口实战初体验<br>4.如何测试是否已实现该接口？<br>5.空接口&amp;类型断言<br>6.接口零值<br>7.一个类型实现多个接口<br>8.指针与值类型实现接口的区别<br>9.接口嵌套</p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Golang Study Package</title>
+      <link href="/2019/11/28/Golang-Study-Package/"/>
+      <url>/2019/11/28/Golang-Study-Package/</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>计算机网络学习-基本概念</title>
       <link href="/2019/11/26/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AD%A6%E4%B9%A0-%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/"/>
       <url>/2019/11/26/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AD%A6%E4%B9%A0-%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/</url>
@@ -403,7 +442,7 @@
       <link href="/2017/03/03/%E6%9B%B4%E6%96%B0blog/"/>
       <url>/2017/03/03/%E6%9B%B4%E6%96%B0blog/</url>
       
-        <content type="html"><![CDATA[<hr><p>博客内容更新</p><a id="more"></a><h3 id="新建文章"><a href="#新建文章" class="headerlink" title="新建文章"></a>新建文章</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure><h3 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server 或 <span class="variable">$hexo</span> s</span><br></pre></td></tr></table></figure><h3 id="清空资源文件"><a href="#清空资源文件" class="headerlink" title="清空资源文件"></a>清空资源文件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo clean</span><br></pre></td></tr></table></figure><h3 id="重新生成资源文件"><a href="#重新生成资源文件" class="headerlink" title="重新生成资源文件"></a>重新生成资源文件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate 或 $ hexo g</span><br></pre></td></tr></table></figure><h3 id="发布文章到github-io"><a href="#发布文章到github-io" class="headerlink" title="发布文章到github.io"></a>发布文章到github.io</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy 或 hexo d</span><br></pre></td></tr></table></figure>]]></content>
+        <content type="html"><![CDATA[<hr><p>博客内容更新</p><a id="more"></a><h3 id="新建文章"><a href="#新建文章" class="headerlink" title="新建文章"></a>新建文章</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure><h3 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server 或 <span class="variable">$hexo</span> s</span><br></pre></td></tr></table></figure><h3 id="清空资源文件"><a href="#清空资源文件" class="headerlink" title="清空资源文件"></a>清空资源文件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo clean</span><br></pre></td></tr></table></figure><h3 id="重新生成资源文件"><a href="#重新生成资源文件" class="headerlink" title="重新生成资源文件"></a>重新生成资源文件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate 或 $ hexo g</span><br></pre></td></tr></table></figure><h3 id="发布文章到github-io"><a href="#发布文章到github-io" class="headerlink" title="发布文章到github.io"></a>发布文章到github.io</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy 或 hexo d</span><br></pre></td></tr></table></figure><h3 id="首页显示排版混乱"><a href="#首页显示排版混乱" class="headerlink" title="首页显示排版混乱"></a>首页显示排版混乱</h3><p> 在每个需要的地方，加上<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">    &lt;!--more--&gt;</span><br><span class="line">例如，在一级标题和二级标题间截断</span><br><span class="line">    # 一级标题</span><br><span class="line">    xxxxxxx</span><br><span class="line">    &lt;!--more--&gt;</span><br><span class="line">    ## 二级标题</span><br><span class="line">    xxxxxxxx</span><br><span class="line">    &lt;!--more--&gt;</span><br><span class="line">    ## 二级标题</span><br><span class="line">    xxxxxxxx</span><br><span class="line">    &lt;!--more--&gt;</span><br></pre></td></tr></table></figure></p><h3 id="标签和分类数量不正确"><a href="#标签和分类数量不正确" class="headerlink" title="标签和分类数量不正确"></a>标签和分类数量不正确</h3><p> 删除.deploy_git文件夹和db.json，再删除public文件夹</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo g</span><br><span class="line">hexo g</span><br><span class="line">hexo s</span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure><p>这里g执行两次是为了防止小机率的页面渲染不充分的问题 s是预览，可以先查看一下有没有什么问题 再次部署后，问题解决</p>]]></content>
       
       
       <categories>
