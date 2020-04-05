@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>Go Api编程</title>
+      <link href="/2020/04/05/Go-Api%E7%BC%96%E7%A8%8B/"/>
+      <url>/2020/04/05/Go-Api%E7%BC%96%E7%A8%8B/</url>
+      
+        <content type="html"><![CDATA[<h2 id="Agenda"><a href="#Agenda" class="headerlink" title="Agenda"></a>Agenda</h2><ul><li>什么是API</li><li>为什么使用API开发</li><li>API开发中几个关键点</li><li>GO适合开发API</li></ul><a id="more"></a><h2 id="API-Centric的好处"><a href="#API-Centric的好处" class="headerlink" title="API-Centric的好处"></a>API-Centric的好处</h2><ul><li>服务多个终端</li><li>标准化 对内对外都能实现同一标准（http+json/xml）</li><li>适合团队协作</li><li>代码清晰，结构胡，可维护性强</li><li>安全性， 可利用认证系统做做API的安全</li><li>去中心化，易拓展，API无状态变化，方便进行拓展</li><li>实现模块化，实现最小化的API之后，可通过组合又可以拼接成新API</li><li>可以快速将内部API开放</li></ul><h2 id="API-的典型部署方案"><a href="#API-的典型部署方案" class="headerlink" title="API 的典型部署方案"></a>API 的典型部署方案</h2><p><img src="/2020/04/05/Go-Api编程/API.png" alt="RUNOOB 图标"></p><h2 id="API-关键点"><a href="#API-关键点" class="headerlink" title="API 关键点"></a>API 关键点</h2><ul><li>运行速度快</li><li>开发效率高</li><li>运行稳定</li></ul><h2 id="GO的主要特点"><a href="#GO的主要特点" class="headerlink" title="GO的主要特点"></a>GO的主要特点</h2><ul><li>语法简单  </li><li>类型安全和内存安全</li><li>以非常直观和极低的代价方案实现高并发</li><li>高效的垃圾回收机制</li><li>快速编译</li><li>为多核计算机提供性能提升的解决方案</li><li>跨平台编译</li><li>集成工具丰富，例gofmt、godoc</li></ul><h2 id="GO-并发编程"><a href="#GO-并发编程" class="headerlink" title="GO 并发编程"></a>GO 并发编程</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line">import (</span><br><span class="line">    &quot;fmt&quot;</span><br><span class="line">    &quot;net/http&quot;</span><br><span class="line">    &quot;time&quot;</span><br><span class="line">)</span><br><span class="line">func main() &#123;</span><br><span class="line">    urls := []string&#123;&quot;http://www.google.com.hk/&quot;, &quot;http://cn.bing.com/&quot;&#125;</span><br><span class="line">    start := time.Now()</span><br><span class="line">    done := make(chan string)</span><br><span class="line">    for _, u := range urls &#123;</span><br><span class="line">        go func(u string) &#123;</span><br><span class="line">            resp, err := http.Get(u)</span><br><span class="line">            if err != nil &#123;</span><br><span class="line">                done &lt;- u + &quot; &quot; + err.Error()</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                done &lt;- u + &quot; &quot; + resp.Status</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;(u)</span><br><span class="line">    &#125;</span><br><span class="line">    for _ = range urls &#123;</span><br><span class="line">        fmt.Println(&lt;-done, time.Since(start))</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h2 id="API-开发关注点"><a href="#API-开发关注点" class="headerlink" title="API 开发关注点"></a>API 开发关注点</h2><ul><li>并发处理 —- go并发</li><li>http处理 —- http内置包</li><li>数据操作 —- io/os/strings/strconv/sql 包</li><li>XML/JSON 处理 —- json/xml 包</li><li>日志处理 —- log 包</li><li>用户认证 —- oauth/ oauth2/ basic/ Digest authentication</li><li>数据加密 —- aes/ dec/ md5/ hash/ sha1等包</li></ul><h2 id="Beego执行逻辑"><a href="#Beego执行逻辑" class="headerlink" title="Beego执行逻辑"></a>Beego执行逻辑</h2><p><img src="/2020/04/05/Go-Api编程/beego.png" alt="RUNOOB 图标"></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> golang </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 并发 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>技术提升</title>
       <link href="/2020/03/11/%E6%8A%80%E6%9C%AF%E6%8F%90%E5%8D%87/"/>
       <url>/2020/03/11/%E6%8A%80%E6%9C%AF%E6%8F%90%E5%8D%87/</url>
